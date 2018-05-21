@@ -1,0 +1,7 @@
+(jbuild_version 1)
+
+(library
+ ((name ppx_optint)
+  (kind ppx_rewriter)
+  (libraries (compiler-libs ppx_core))
+  (preprocess (pps (ppx_metaquot)))))
