@@ -5,6 +5,7 @@
 #include <caml/mlvalues.h>
 #include <caml/bigarray.h>
 #include <caml/memory.h>
+#include <caml/alloc.h>
 
 /* XXX(dinosaure): snippet from digestif (<3 david). */
 

@@ -5,6 +5,8 @@
 
 /* XXX(dinosaure): extracted from zlib. */
 
+#include "adler32.h"
+
 #define BASE 65521U /* largest prime smaller than 65536 */
 #define NMAX 5552   /* NMAX is the largest n such that 255n(n+1)/2 + (n+1)(BASE-1) <= 2^32-1 */
 
@@ -21,12 +23,6 @@
 #define MOD(a) a %= BASE
 #define MOD28(a) a %= BASE
 #define MOD63(a) a %= BASE
-
-typedef unsigned long uLong; /* 32-bits or more. */
-typedef unsigned int  uInt;  /* 16-bits or more (in OCaml, it could be 31 bits or more). */
-typedef unsigned char Byte;  /* 8 bits */
-typedef Byte FAR Bytef;      /* XXX(dinosaure): we need to understand EXACTLY what FAR means
-                                - it seems to be specific to old Microsoft architecture. */
 
 uLong _adler32(adler, buf, len)
      uLong adler;

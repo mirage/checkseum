@@ -1,7 +1,0 @@
-(jbuild_version 1)
-
-(executables
- ((names      (test))
-  (modules    (test))
-  (libraries  (ppx_optint))
-  (preprocess (pps (ppx_optint)))))

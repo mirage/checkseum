@@ -1,0 +1,19 @@
+version = "%%VERSION%%"
+requires = "bigarray optint"
+description = "Interface of the library"
+archive(byte) = "checkseum.cma"
+archive(native) = "checkseum.cmxa"
+plugin(byte) = "checkseum.cma"
+plugin(native) = "checkseum.cmxs"
+
+package "c" (
+  directory = "c"
+  version = "%%VERSION%%"
+  description = "Implementation of checksum function in C"
+  requires = "bigarray checkseum optint"
+  archive(byte) = "checkseum-c.cma"
+  archive(native) = "checkseum-c.cmxa"
+  plugin(byte) = "checkseum-c.cma"
+  plugin(native) = "checkseum-c.cmxs"
+  exists_if = "checkseum-c.cma"
+)
