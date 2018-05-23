@@ -2,7 +2,7 @@ type bigstring = (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.
 
 module type S =
 sig
-  type t
+  type t = Optint.t
 
   val pp: Format.formatter -> t -> unit
   val equal: t -> t -> bool
