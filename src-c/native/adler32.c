@@ -101,5 +101,5 @@ uLong adler32(adler, buf, len)
      const Bytef *buf;
      uInt len;
 {
-  return _adler32(adler, buf, len);
+  return (_adler32(adler, buf, len));
 }
