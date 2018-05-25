@@ -18,4 +18,5 @@ let () =
      ; Pkg.clib "src-c/liblaolao_stubs.clib" ~lib_dst_dir:"c"
      ; Pkg.lib "src/checkseum_sig.cmi" ~dst:"checkseum_sig.cmi"
      ; Pkg.mllib "src/checkseum.mllib"
-     ; Pkg.mllib ~api:["Checkseum"] "src-c/checkseum-c.mllib" ~dst_dir:"c" ]
+     ; Pkg.mllib ~api:["Checkseum"] "src-c/checkseum-c.mllib" ~dst_dir:"c"
+     ; Pkg.mllib ~api:["Checkseum"] "src-ocaml/checkseum-ocaml.mllib" ~dst_dir:"ocaml" ]
