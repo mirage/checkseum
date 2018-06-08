@@ -10,3 +10,5 @@ sig
   val digest_bytes: Bytes.t -> int -> int -> t -> t
   val digest_bigstring: bigstring -> int -> int -> t -> t
 end
+
+module Adler32: S
