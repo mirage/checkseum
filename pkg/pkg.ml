@@ -15,8 +15,9 @@ let () =
      ; Pkg.doc "README.md"
      ; Pkg.doc "CHANGES.md"
 
-     ; Pkg.clib "src-c/liblaolao_stubs.clib" ~lib_dst_dir:"c"
      ; Pkg.lib "src/checkseum.cmi" ~dst:"checkseum.cmi"
-     ; Pkg.mllib "src/checkseum.mllib"
-     ; Pkg.mllib ~api:["Checkseum"] "src-c/checkseum-c.mllib" ~dst_dir:"c"
-     ; Pkg.mllib ~api:["Checkseum"] "src-ocaml/checkseum-ocaml.mllib" ~dst_dir:"ocaml" ]
+     ; Pkg.lib "src/checkseum.cmi" ~dst:"c/checkseum.cmi"
+     ; Pkg.lib "src/checkseum.cmi" ~dst:"ocaml/checkseum.cmi"
+     ; Pkg.clib "src-c/liblaolao_stubs.clib" ~lib_dst_dir:"c"
+     ; Pkg.mllib "src-c/checkseum.mllib" ~dst_dir:"c"
+     ; Pkg.mllib "src-ocaml/checkseum.mllib" ~dst_dir:"ocaml" ]

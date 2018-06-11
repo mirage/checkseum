@@ -1,5 +1,8 @@
 true: safe_string, bin_annot, package(optint)
 
+<src/*.mli>: no_keep_locs
+<src-c/*.mli>: no_keep_locs
+<src-ocaml/*.mli>: no_keep_locs
 <src>: include
-<src-c/checkseum-c.{cma,cmxa}>: record_checkseum_laolao_stubs
+<src-c/checkseum.{cma,cmxa}>: record_checkseum_laolao_stubs
 <src-c/checkseum.cmxs>: link_checkseum_laolao_stubs, use_bigarray
