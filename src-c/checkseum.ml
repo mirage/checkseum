@@ -10,6 +10,8 @@ type bigstring = (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.
 
 external adler32_bigstring : t -> ba -> off -> len -> t = "caml_checkseum_adler32_ba"
 external adler32_bytes     : t -> st -> off -> len -> t = "caml_checkseum_adler32_st"
+external adler_crc32c_bigstring
+  : t -> ba -> off -> len -> t = "caml_checkseum_adler_crc32c_ba"
 
 module type S =
 sig
@@ -20,6 +22,7 @@ sig
   val default: t
   val digest_bytes: Bytes.t -> int -> int -> t -> t
   val digest_bigstring: bigstring -> int -> int -> t -> t
+  val crc32c_bigstring: bigstring -> int -> int -> t -> t
 end
 
 module Adler32: S = struct
@@ -32,4 +35,6 @@ module Adler32: S = struct
     adler32_bytes adler32 bytes off len
   let digest_bigstring bigstring off len adler32 =
     adler32_bigstring adler32 bigstring off len
+  let crc32c_bigstring bigstring off len crc32c =
+    adler_crc32c_bigstring crc32c bigstring off len
 end
