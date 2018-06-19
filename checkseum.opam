@@ -8,7 +8,7 @@ dev-repo:     "https://github.com/dinosaure/checkseum.git"
 doc:          "https://dinosaure.github.io/checkseum/"
 license:      "MIT"
 
-build: [ "ocaml" "pkg/pkg.ml" "build" "--pinned" "%{pinned}%" "--tests" "false" ]
+build: [ "jbuilder" "build" "-p" name "-j" jobs ]
 
 depends: [
   "ocamlbuild"     {build}
