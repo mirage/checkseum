@@ -111,6 +111,9 @@ let crc32c_string =
   let get = String.get in
   crc32c ~get
 
+let%test _ = crc32c_string "" 0 0 @@ (Optint.of_int32 0l) = (Optint.of_int32 0l)
+let%test _ = crc32c_string "\x00" 0 1 @@ (Optint.of_int32 0l) = (Optint.of_int32 0x527d5351l)
+let%test _ = crc32c_string "\xff\xff\xff\xff" 0 4 @@ (Optint.of_int32 0l) = (Optint.of_int32 0xffffffffl)
 let%test _ = crc32c_string "123456789" 0 9 @@ (Optint.of_int32 0l) = (Optint.of_int32 0xe3069283l)
 let%test _ = crc32c_string "Thou hast made me, and shall thy work decay?" 0 9 @@ Optint.of_int32 0l = Optint.of_int32 0x866374c0l
 
