@@ -143,6 +143,10 @@ let digest_bytes =
   let get = Bytes.get in
   digest ~get
 
+let digest_string =
+  let get = String.get in
+  digest ~get
+
 type bigstring = (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
 
 let digest_bigstring =

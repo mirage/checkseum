@@ -8,7 +8,9 @@ sig
   val equal: t -> t -> bool
   val default: t
   val digest_bytes: Bytes.t -> int -> int -> t -> t
+  val digest_string: String.t -> int -> int -> t -> t
   val digest_bigstring: bigstring -> int -> int -> t -> t
 end
 
 module Adler32: S
+module Crc32: S
