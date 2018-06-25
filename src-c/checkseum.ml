@@ -10,6 +10,8 @@ type bigstring = (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.
 
 external adler32_bigstring : t -> ba -> off -> len -> t = "caml_checkseum_adler32_ba"
 external adler32_bytes     : t -> st -> off -> len -> t = "caml_checkseum_adler32_st"
+external adler_crc32c_bigstring
+  : t -> ba -> off -> len -> t = "caml_checkseum_adler_crc32c_ba"
 
 module type S =
 sig
@@ -20,6 +22,7 @@ sig
   val default: t
   val digest_bytes: Bytes.t -> int -> int -> t -> t
   val digest_bigstring: bigstring -> int -> int -> t -> t
+  val crc32c_bigstring: bigstring -> int -> int -> t -> t
 end
 
 module Adler32: S = struct
@@ -32,4 +35,17 @@ module Adler32: S = struct
     adler32_bytes adler32 bytes off len
   let digest_bigstring bigstring off len adler32 =
     adler32_bigstring adler32 bigstring off len
+  let crc32c_bigstring bigstring off len crc32c =
+    adler_crc32c_bigstring crc32c bigstring off len
+
+  let crc32c_string str =
+    crc32c_bigstring @@ Cstruct.to_bigarray @@ Cstruct.of_string str
+
+  let%test _ = crc32c_string "" 0 0 @@ (Optint.of_int32 0l) = (Optint.of_int32 0l)
+  let%test _ = crc32c_string "\x00" 0 1 @@ (Optint.of_int32 0l) = (Optint.of_int32 0x527d5351l)
+  let%test _ = crc32c_string "\x00\x00\x00" 0 3 @@ (Optint.of_int32 0l) = (Optint.of_int32 0x6064a37al)
+  let%test _ = crc32c_string "\xff\xff\xff\xff" 0 4 @@ (Optint.of_int32 0l) = (Optint.of_int 0xffffffff)
+  let%test _ = crc32c_string "123456789" 0 9 @@ (Optint.of_int32 0l) = (Optint.of_int 0xe3069283)
+  let%test _ = crc32c_string "Thou hast made me, and shall thy work decay?" 0 44 @@ Optint.of_int32 0l = Optint.of_int 0x866374c0
+
 end

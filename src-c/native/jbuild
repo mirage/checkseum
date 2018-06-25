@@ -1,5 +1,6 @@
 (library
  ((name laolao)
   (public_name checkseum.laolao)
-  (c_names (stubs adler32))
+  (c_names (stubs adler32 crc32c_adler))
+  (c_library_flags (-lpthread))
   (c_flags (-I.))))
