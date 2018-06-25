@@ -1,7 +1,7 @@
 (library
  ((name checkseum_c)
   (public_name checkseum.c)
-  (libraries (optint cstruct checkseum.laolao))
+  (libraries (optint checkseum.laolao))
   (wrapped false)
   (inline_tests)
   (preprocess (pps (ppx_inline_test)))
