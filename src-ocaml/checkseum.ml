@@ -23,13 +23,13 @@ module Adler32: S = struct
   let digest_bigstring = Gin_adler32.digest_bigstring
 end
 
-module Crc32: S = struct
+module Crc32c: S = struct
   type t = Optint.t
 
   let equal = Optint.equal
   let pp = Optint.pp
   let default = Optint.zero
-  let digest_bytes = Gin_crc32.digest_bytes
-  let digest_string = Gin_crc32.digest_string
-  let digest_bigstring = Gin_crc32.digest_bigstring
+  let digest_bytes = Gin_crc32c.digest_bytes
+  let digest_string = Gin_crc32c.digest_string
+  let digest_bigstring = Gin_crc32c.digest_bigstring
 end

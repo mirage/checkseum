@@ -13,4 +13,4 @@ sig
 end
 
 module Adler32: S
-module Crc32: S
+module Crc32c: S

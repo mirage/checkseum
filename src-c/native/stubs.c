@@ -1,6 +1,6 @@
 #include "checkseum.h"
 #include "adler32.h"
-#include "crc32.h"
+#include "crc32c.h"
 
 #include <stdio.h>
 
@@ -20,13 +20,13 @@ caml_checkseum_adler32_st(value t, value src, value off, value len)
 }
 
 CAMLprim value
-caml_checkseum_crc32_ba(value t, value src, value off, value len)
+caml_checkseum_crc32c_ba(value t, value src, value off, value len)
 {
   return (Val_int (crc32c(Int_val (t), _ba_uint8_off (src, off), Int_val (len))));
 }
 
 CAMLprim value
-caml_checkseum_crc32_st(value t, value src, value off, value len)
+caml_checkseum_crc32c_st(value t, value src, value off, value len)
 {
   return (Val_int (crc32c(Int_val (t), _st_uint8_off (src, off), Int_val (len))));
 }
@@ -47,13 +47,13 @@ caml_checkseum_adler32_st(value t, value src, value off, value len)
 }
 
 CAMLprim value
-caml_checkseum_crc32_ba(value t, value src, value off, value len)
+caml_checkseum_crc32c_ba(value t, value src, value off, value len)
 {
   return (copy_int32(crc32c(Int32_val (t), _ba_uint8_off (src, off), Int_val (len))));
 }
 
 CAMLprim value
-caml_checkseum_crc32_st(value t, value src, value off, value len)
+caml_checkseum_crc32c_st(value t, value src, value off, value len)
 {
   return (copy_int32(crc32c(Int32_val (t), _st_uint8_off (src, off), Int_val (len))));
 }

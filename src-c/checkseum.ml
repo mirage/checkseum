@@ -10,8 +10,8 @@ type bigstring = (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.
 
 external adler32_bigstring : t -> ba -> off -> len -> t = "caml_checkseum_adler32_ba"
 external adler32_bytes     : t -> st -> off -> len -> t = "caml_checkseum_adler32_st"
-external crc32_bigstring   : t -> ba -> off -> len -> t = "caml_checkseum_crc32_ba"
-external crc32_bytes       : t -> st -> off -> len -> t = "caml_checkseum_crc32_st"
+external crc32c_bigstring  : t -> ba -> off -> len -> t = "caml_checkseum_crc32c_ba"
+external crc32c_bytes      : t -> st -> off -> len -> t = "caml_checkseum_crc32c_st"
 
 module type S =
 sig
@@ -39,7 +39,7 @@ module Adler32: S = struct
     adler32_bigstring adler32 bigstring off len
 end
 
-module Crc32: S = struct
+module Crc32c: S = struct
   type t = Optint.t
 
   let equal = Optint.equal
@@ -47,11 +47,11 @@ module Crc32: S = struct
   let default = Optint.zero
 
   let digest_bytes bytes off len crc32 =
-    crc32_bytes crc32 bytes off len
+    crc32c_bytes crc32 bytes off len
   let digest_string string off len crc32 =
     digest_bytes (Bytes.unsafe_of_string string) off len crc32
   let digest_bigstring bigstring off len crc32 =
-    crc32_bigstring crc32 bigstring off len
+    crc32c_bigstring crc32 bigstring off len
 
   let%test _ = digest_string "" 0 0 @@ default = (Optint.of_int32 0l)
   let%test _ = digest_string "\x00" 0 1 @@ default = (Optint.of_int32 0x527d5351l)
