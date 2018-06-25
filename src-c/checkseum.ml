@@ -52,11 +52,4 @@ module Crc32c: S = struct
     digest_bytes (Bytes.unsafe_of_string string) off len crc32
   let digest_bigstring bigstring off len crc32 =
     crc32c_bigstring crc32 bigstring off len
-
-  let%test _ = digest_string "" 0 0 @@ default = (Optint.of_int32 0l)
-  let%test _ = digest_string "\x00" 0 1 @@ default = (Optint.of_int32 0x527d5351l)
-  let%test _ = digest_string "\x00\x00\x00" 0 3 @@ default = (Optint.of_int32 0x6064a37al)
-  let%test _ = digest_string "\xff\xff\xff\xff" 0 4 @@ default = (Optint.of_int 0xffffffff)
-  let%test _ = digest_string "123456789" 0 9 @@ default = (Optint.of_int 0xe3069283)
-  let%test _ = digest_string "Thou hast made me, and shall thy work decay?" 0 44 @@ default = Optint.of_int 0x866374c0
 end
