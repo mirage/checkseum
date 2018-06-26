@@ -7,12 +7,12 @@ sudo: true
 env:
   matrix:
   - PACKAGE="checkseum" OCAML_VERSION=4.03 TESTS=false
-    PINs="optint:https://gihtub.com/dinosaure/optint.git"
+    PINs="optint:https://github.com/dinosaure/optint.git"
 
   - PACKAGE="checkseum" OCAML_VERSION=4.03 INSTALL=false
-    PINS="optint:https://gihtub.com/dinosaure/optint.git checkseum-test-c:test"
+    PINS="optint:https://gittub.com/dinosaure/optint.git checkseum-test-c:test"
     EXTRA_DEPS="checkseum-test-c"
 
   - PACKAGE="checkseum" OCAML_VERSION=4.03 INSTALL=false
-    PINS="optint:https://gihtub.com/dinosaure/optint.git checkseum-test-ocaml:test"
+    PINS="optint:https://github.com/dinosaure/optint.git checkseum-test-ocaml:test"
     EXTRA_DEPS="checkseum-test-ocaml"
