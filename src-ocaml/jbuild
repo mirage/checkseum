@@ -4,7 +4,6 @@
   (libraries (optint))
   (wrapped false)
   (inline_tests)
-  (preprocess (pps (ppx_inline_test)))
   (flags (:standard -no-keep-locs))))
 
 (rule (copy# ${lib:checkseum:checkseum.mli} checkseum.mli))
