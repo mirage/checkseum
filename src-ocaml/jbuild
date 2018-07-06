@@ -3,7 +3,6 @@
   (public_name checkseum.ocaml)
   (libraries (optint))
   (wrapped false)
-  (inline_tests)
   (flags (:standard -no-keep-locs))))
 
 (rule (copy# ${lib:checkseum:checkseum.mli} checkseum.mli))
