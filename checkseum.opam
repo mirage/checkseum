@@ -11,9 +11,7 @@ license:      "MIT"
 build: [ "jbuilder" "build" "-p" name "-j" jobs ]
 
 depends: [
-  "ocamlbuild"     {build}
-  "ocamlfind"      {build}
-  "topkg"          {build}
+  "jbuilder"      {build}
   "optint"
   "base-bytes"
   "base-bigarray"
