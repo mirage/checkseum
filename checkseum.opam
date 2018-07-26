@@ -15,6 +15,9 @@ depends: [
   "optint"
   "base-bytes"
   "base-bigarray"
+  "fmt"
+  "rresult"
+  "cmdliner"
 ]
 
 available: [ ocaml-version >= "4.03.0" ]
