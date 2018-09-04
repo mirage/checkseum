@@ -23,6 +23,7 @@ depends: [
   "fmt"
   "rresult"
   "cmdliner"
+  "alcotest"      {test}
 ]
 
 available: [ ocaml-version >= "4.03.0" ]
