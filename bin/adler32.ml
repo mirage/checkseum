@@ -9,9 +9,9 @@ let digest input =
       let ic = open_in file in
       X.encoder X.adler32 (`Channel ic),
       (fun () -> close_in ic) in
-  let rec go () = match X.encode encoder with
+  let go () = match X.encode encoder with
     | `Await -> assert false (* XXX(dinosaure): iff [`Manual]. *)
-    | `End value -> Fmt.pr "%a\n%!" Checkseum.Adler32.pp value in
+    | `End value -> close_input (); Fmt.pr "%a\n%!" Checkseum.Adler32.pp value in
   go ()
 
 open Cmdliner
