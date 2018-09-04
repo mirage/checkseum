@@ -8,16 +8,22 @@ dev-repo:     "https://github.com/dinosaure/checkseum.git"
 doc:          "https://dinosaure.github.io/checkseum/"
 license:      "MIT"
 
-build: [ "jbuilder" "build" "-p" name "-j" jobs ]
+build: [
+  [ "dune" "subst" ] {pinned}
+  [ "dune" "build" "-p" name "-j" jobs ]
+]
+
+build-test: [[ "dune" "runtest" "-p" name "-j" jobs ]]
 
 depends: [
-  "jbuilder"      {build}
+  "dune"          {build}
   "optint"
   "base-bytes"
   "base-bigarray"
   "fmt"
   "rresult"
   "cmdliner"
+  "alcotest"      {test}
 ]
 
 available: [ ocaml-version >= "4.03.0" ]
