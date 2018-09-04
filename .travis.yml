@@ -5,14 +5,13 @@ install:
 script: bash -ex .travis-opam.sh
 sudo: true
 env:
+  global:
+    - PACKAGE="checkseum"
   matrix:
-  - PACKAGE="checkseum" OCAML_VERSION=4.03 TESTS=false
-    PINS="optint.dev:https://github.com/dinosaure/optint.git"
-
-  - PACKAGE="checkseum" OCAML_VERSION=4.03 INSTALL=false
-    PINS="optint.dev:https://github.com/dinosaure/optint.git checkseum-test-c:test"
-    EXTRA_DEPS="checkseum-test-c"
-
-  - PACKAGE="checkseum" OCAML_VERSION=4.03 INSTALL=false
-    PINS="optint.dev:https://github.com/dinosaure/optint.git checkseum-test-ocaml:test"
-    EXTRA_DEPS="checkseum-test-ocaml"
+  - OCAML_VERSION=4.03 TEST=true
+  - OCAML_VERSION=4.04 TEST=true
+  - OCAML_VERSION=4.05 TEST=true
+  - OCAML_VERSION=4.05 TEST=false EXTRA_DEPS="mirage-xen"
+  - OCAML_VERSION=4.06 TEST=true
+  - OCAML_VERSION=4.07 TEST=true
+  - OCAML_VERSION=4.07 TEST=false EXTRA_DEPS="mirage-solo5"
