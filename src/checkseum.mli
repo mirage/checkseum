@@ -30,3 +30,6 @@ module Adler32 : S
 
 (** Implementation of the CRC32C checksum. *)
 module Crc32c : S
+
+(** Implementation of CRC32 checksum. *)
+module Crc32 : S

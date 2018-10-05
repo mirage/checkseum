@@ -24,6 +24,12 @@ external crc32c_bigstring :
 
 external crc32c_bytes : t -> st -> off -> len -> t = "caml_checkseum_crc32c_st"
 
+external crc32_bigstring :
+  t -> ba -> off -> len -> t
+  = "caml_checkseum_crc32_ba"
+
+external crc32_bytes : t -> st -> off -> len -> t = "caml_checkseum_crc32_st"
+
 module type S = sig
   type t = Optint.t
 
@@ -56,11 +62,26 @@ module Crc32c : S = struct
   let equal = Optint.equal
   let pp = Optint.pp
   let default = Optint.zero
-  let digest_bytes bytes off len crc32 = crc32c_bytes crc32 bytes off len
+  let digest_bytes bytes off len crc32c = crc32c_bytes crc32c bytes off len
+
+  let digest_string string off len crc32c =
+    digest_bytes (Bytes.unsafe_of_string string) off len crc32c
+
+  let digest_bigstring bigstring off len crc32c =
+    crc32c_bigstring crc32c bigstring off len
+end
+
+module Crc32 : S = struct
+  type t = Optint.t
+
+  let equal = Optint.equal
+  let pp = Optint.pp
+  let default = Optint.zero
+  let digest_bytes bytes off len crc32 = crc32_bytes crc32 bytes off len
 
   let digest_string string off len crc32 =
     digest_bytes (Bytes.unsafe_of_string string) off len crc32
 
   let digest_bigstring bigstring off len crc32 =
-    crc32c_bigstring crc32 bigstring off len
+    crc32_bigstring crc32 bigstring off len
 end
