@@ -1,6 +1,7 @@
 #ifndef CHECKSUM_CRC32_H
 #define CHECKSUM_CRC32_H
 
+#include <stdint.h>
 #include "size_t.h"
 #include "ptrdiff_t.h"
 
@@ -21,6 +22,6 @@ typedef CHECKSEUM_U4 crc_t;
 typedef unsigned long crc_t;
 #endif
 
-unsigned long crc32(unsigned long crc, const unsigned char *buf, size_t len);
+uint32_t crc32(uint32_t crc, const unsigned char *buf, size_t len);
 
 #endif

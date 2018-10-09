@@ -560,7 +560,7 @@ static unsigned long crc32_big(unsigned long crc, const unsigned char * buf, siz
 #define DO1 crc = crc_table[0][((int)crc ^ (*buf++)) & 0xff] ^ (crc >> 8)
 #define DO8 DO1; DO1; DO1; DO1; DO1; DO1; DO1; DO1
 
-unsigned long crc32(unsigned long crc, const unsigned char * buf, size_t len)
+uint32_t crc32(uint32_t crc, const unsigned char * buf, size_t len)
 {
   if (len == 0) return crc;
 
