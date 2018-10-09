@@ -10,6 +10,7 @@ let io_buffer_size = 65536
 module X : sig
   type adler32 = Checkseum.Adler32.t
   type crc32c = Checkseum.Crc32c.t
+  type crc32 = Checkseum.Crc32.t
   type src = [`Channel of in_channel | `Manual | `String of string]
   type 'value r = [`Await | `End of 'value]
   type 'a kind
@@ -20,10 +21,17 @@ module X : sig
   val encode : 'value t -> 'value r
   val adler32 : adler32 kind
   val crc32c : crc32c kind
+  val crc32 : crc32c kind
 end = struct
   type adler32 = Checkseum.Adler32.t
   type crc32c = Checkseum.Crc32c.t
-  type 'a kind = Adler32 : adler32 kind | Crc32c : crc32c kind
+  type crc32 = Checkseum.Crc32.t
+
+  type 'a kind =
+    | Adler32 : adler32 kind
+    | Crc32c : crc32c kind
+    | Crc32 : crc32 kind
+
   type src = [`Channel of in_channel | `Manual | `String of string]
   type 'value r = [`Await | `End of 'value]
 
@@ -73,6 +81,7 @@ end = struct
     match kind with
     | Adler32 -> Checkseum.Adler32.digest_bytes src (off + pos) rem t
     | Crc32c -> Checkseum.Crc32c.digest_bytes src (off + pos) rem t
+    | Crc32 -> Checkseum.Crc32.digest_bytes src (off + pos) rem t
 
   let i_rem encoder = encoder.i_len - encoder.i_pos + 1
 
@@ -105,10 +114,12 @@ end = struct
     ; value=
         ( match kind with
         | Adler32 -> Checkseum.Adler32.default
-        | Crc32c -> Checkseum.Crc32c.default )
+        | Crc32c -> Checkseum.Crc32c.default
+        | Crc32 -> Checkseum.Crc32.default )
     ; k= encode }
 
   let encode encoder = encoder.k encoder
   let adler32 = Adler32
   let crc32c = Crc32c
+  let crc32 = Crc32
 end
