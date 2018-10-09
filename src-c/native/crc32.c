@@ -562,7 +562,7 @@ static unsigned long crc32_big(unsigned long crc, const unsigned char * buf, siz
 
 unsigned long crc32(unsigned long crc, const unsigned char * buf, size_t len)
 {
-  if (len == 0) return 0UL;
+  if (len == 0) return crc;
 
 #ifdef BYFOUR
   if (sizeof(void *) == sizeof(ptrdiff_t)) {
