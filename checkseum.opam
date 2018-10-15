@@ -4,7 +4,7 @@ maintainer:   [ "Romain Calascibetta <romain.calascibetta@gmail.com>" ]
 authors:      [ "Romain Calascibetta <romain.calascibetta@gmail.com>" ]
 homepage:     "https://github.com/dinosaure/checkseum"
 bug-reports:  "https://github.com/dinosaure/checkseum/issues"
-dev-repo:     "git://github.com/dinosaure/checkseum.git"
+dev-repo:     "git+https://github.com/dinosaure/checkseum.git"
 doc:          "https://dinosaure.github.io/checkseum/"
 license:      "MIT"
 synopsis:     "Adler-32, CRC32 and CRC32-C implementation in C and OCaml"
