@@ -1,5 +1,5 @@
-#ifndef CHECKSUM_CRC32_H
-#define CHECKSUM_CRC32_H
+#ifndef CHECKSUM_CRC32C_H
+#define CHECKSUM_CRC32C_H
 
 #include "size_t.h"
 #include <stdint.h>

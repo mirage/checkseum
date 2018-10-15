@@ -16,3 +16,10 @@
  (package checkseum)
  (modules adler32)
  (libraries checkseum.c common rresult fmt cmdliner))
+
+(executable
+ (name crc32)
+ (public_name crc32)
+ (package checkseum)
+ (modules crc32)
+ (libraries checkseum.c common rresult fmt cmdliner))
