@@ -6,7 +6,7 @@ environment:
     FORK_USER: ocaml
     FORK_BRANCH: master
     CYG_ROOT: C:\cygwin64
-    PINS: "checkseum.dev:. checkseum-test-c.dev:test checkseum-test-ocaml.dev:test"
+    PINS: "checkseum.dev:."
   matrix:
   - PACKAGE: "checkseum.dev"
 
