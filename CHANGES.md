@@ -4,6 +4,7 @@ v0.0.3 2018-10-15 Paris (France)
 - _Dunify_ project
 - Add CRC32 implementation
 - Fixed META file (@g2p)
+- Update OPAM file
 
 v0.0.2 2018-08-23 Paris (France)
 --------------------------------
