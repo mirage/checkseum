@@ -1,10 +1,10 @@
-opam-version: "1.2"
+opam-version: "2.0"
 name:         "checkseum"
 maintainer:   [ "Romain Calascibetta <romain.calascibetta@gmail.com>" ]
 authors:      [ "Romain Calascibetta <romain.calascibetta@gmail.com>" ]
 homepage:     "https://github.com/dinosaure/checkseum"
 bug-reports:  "https://github.com/dinosaure/checkseum/issues"
-dev-repo:     "https://github.com/dinosaure/checkseum.git"
+dev-repo:     "git://github.com/dinosaure/checkseum.git"
 doc:          "https://dinosaure.github.io/checkseum/"
 license:      "MIT"
 synopsis:     "Adler-32, CRC32 and CRC32-C implementation in C and OCaml"
@@ -16,13 +16,13 @@ This library is on top of optint to get the best representation of an int32.
 """
 
 build: [
-  [ "dune" "subst" ] {pinned}
+  [ "dune" "subst" ]
   [ "dune" "build" "-p" name "-j" jobs ]
+  [ "dune" "runtest" "-p" name "-j" jobs ] {with-test}
 ]
 
-build-test: [[ "dune" "runtest" "-p" name "-j" jobs ]]
-
 depends: [
+  "ocaml"         {>= "4.03.0"}
   "dune"          {build}
   "optint"
   "base-bytes"
@@ -30,7 +30,5 @@ depends: [
   "fmt"
   "rresult"
   "cmdliner"
-  "alcotest"      {test}
+  "alcotest"      {with-test}
 ]
-
-available: [ ocaml-version >= "4.03.0" ]
