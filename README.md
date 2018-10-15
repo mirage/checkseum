@@ -14,3 +14,11 @@ end-user can choose between the C implementation or the OCaml implementation
 
 Of course, you can link directly to `checkseum.c` or `checkseum.ocaml` if you
 want to make an executable directly.
+
+## Build Requirements
+
+ * OCaml >= 4.03.0
+ * `base-bytes`
+ * `base-bigarray`
+ * `dune` to build
+ * `optint`
