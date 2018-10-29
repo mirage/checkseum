@@ -32,3 +32,12 @@ depends: [
   "cmdliner"
   "alcotest"      {with-test}
 ]
+
+depopts: [
+  "ocaml-freestanding"
+  "mirage-xen-posix"
+]
+
+conflicts: [
+  "ocaml-freestanding" {< "0.4.1"}
+]
