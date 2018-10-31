@@ -3,8 +3,6 @@
 #include "crc32c.h"
 #include "crc32.h"
 
-#include <stdio.h>
-
 #ifdef ARCH_SIXTYFOUR
 /* XXX(dinosaure): un-allocated version for 64-bits architecture. */
 
