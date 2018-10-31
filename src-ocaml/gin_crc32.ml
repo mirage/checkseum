@@ -72,7 +72,8 @@ let update_crc acc c =
   let index = Optint.to_int acc lxor int_of_char c land 0xff in
   crc_table.(index) ^^^ (acc >>> 8) &&& ffffffff
 
-let crc32 : type a. get:(a -> int -> char) -> a -> int -> int -> Optint.t -> Optint.t =
+let crc32 : type a.
+    get:(a -> int -> char) -> a -> int -> int -> Optint.t -> Optint.t =
  fun ~get buf off len crc ->
   buf_fold_left get update_crc (crc ^^^ ffffffff) buf off len ^^^ ffffffff
 
@@ -84,9 +85,11 @@ type bigstring =
 let equal a b = Optint.equal a b
 let pp ppf v = Optint.pp ppf v
 let default = Optint.zero
-
 let digest_bigstring a o l v = crc32 ~get:Bigarray.Array1.get a o l v
-let unsafe_digest_bigstring a o l v = crc32 ~get:Bigarray.Array1.unsafe_get a o l v
+
+let unsafe_digest_bigstring a o l v =
+  crc32 ~get:Bigarray.Array1.unsafe_get a o l v
+
 let digest_string a o l v = crc32 ~get:String.get a o l v
 let unsafe_digest_string a o l v = crc32 ~get:String.unsafe_get a o l v
 let digest_bytes a o l v = crc32 ~get:Bytes.get a o l v
