@@ -10,6 +10,9 @@ type len = int
 type bigstring =
   (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
 
+(* XXX(dinosaure): we should be able to annot external with [@@noalloc] but
+   it's depending on architecture and structural value of [Optint.t]. TODO! *)
+
 external adler32_bigstring :
   t -> ba -> off -> len -> t
   = "caml_checkseum_adler32_ba"
@@ -44,8 +47,8 @@ end
 module Adler32 : S = struct
   type t = Optint.t
 
-  let equal = Optint.equal
-  let pp = Optint.pp
+  let equal a b = Optint.equal a b
+  let pp ppf v = Optint.pp ppf v
   let default = Optint.one
   let digest_bytes bytes off len adler32 = adler32_bytes adler32 bytes off len
 
@@ -59,8 +62,8 @@ end
 module Crc32c : S = struct
   type t = Optint.t
 
-  let equal = Optint.equal
-  let pp = Optint.pp
+  let equal a b = Optint.equal a b
+  let pp ppf v = Optint.pp ppf v
   let default = Optint.zero
   let digest_bytes bytes off len crc32c = crc32c_bytes crc32c bytes off len
 
@@ -74,8 +77,8 @@ end
 module Crc32 : S = struct
   type t = Optint.t
 
-  let equal = Optint.equal
-  let pp = Optint.pp
+  let equal a b = Optint.equal a b
+  let pp ppf v = Optint.pp ppf v
   let default = Optint.zero
   let digest_bytes bytes off len crc32 = crc32_bytes crc32 bytes off len
 

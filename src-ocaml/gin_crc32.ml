@@ -1,10 +1,10 @@
 (* Copyright (c) 2011, Jonathan Derque - MIT licensed *)
 (* Copyright (c) 2018, Romain Calascibetta - MIT licensed *)
 
-let ( &&& ) = Optint.logand
-let ( ^^^ ) = Optint.logxor
+let ( &&& ) a b = Optint.logand a b
+let ( ^^^ ) a b = Optint.logxor a b
 let ffffffff = Optint.(succ (mul max_int (of_int 2)))
-let ( >>> ) = Optint.shift_right_logical
+let ( >>> ) a b = Optint.shift_right_logical a b
 
 let crc_table =
   Array.map Optint.of_int32
@@ -81,14 +81,6 @@ let crc32 : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
 type bigstring =
   (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
 
-let digest_bigstring =
-  let get : bigstring -> int -> char = Bigarray.Array1.get in
-  crc32 ~get
-
-let digest_string =
-  let get = String.get in
-  crc32 ~get
-
-let digest_bytes =
-  let get = Bytes.get in
-  crc32 ~get
+let digest_bigstring a o l v = crc32 ~get:Bigarray.Array1.get a o l v
+let digest_string a o l v = crc32 ~get:String.get a o l v
+let digest_bytes a o l v = crc32 ~get:Bytes.get a o l v

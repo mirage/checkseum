@@ -3,9 +3,9 @@
 
 type t = Optint.t
 
-let ( &&& ) = Optint.logand
-let ( ^^^ ) = Optint.logxor
-let ( >>> ) = Optint.shift_right_logical
+let ( &&& ) a b = Optint.logand a b
+let ( ^^^ ) a b = Optint.logxor a b
+let ( >>> ) a b = Optint.shift_right_logical a b
 let ffffffff = Optint.(succ (mul max_int (of_int 2)))
 let ( ~~~ ) x = Optint.(logand (lognot x) ffffffff)
 
@@ -82,14 +82,6 @@ let crc32c : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
 type bigstring =
   (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
 
-let digest_bigstring =
-  let get : bigstring -> int -> char = Bigarray.Array1.get in
-  crc32c ~get
-
-let digest_string =
-  let get = String.get in
-  crc32c ~get
-
-let digest_bytes =
-  let get = Bytes.get in
-  crc32c ~get
+let digest_bigstring a o l v = crc32c ~get:Bigarray.Array1.get a o l v
+let digest_string a o l v = crc32c ~get:String.get a o l v
+let digest_bytes a o l v = crc32c ~get:Bytes.get a o l v
