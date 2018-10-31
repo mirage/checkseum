@@ -117,10 +117,13 @@ let digest : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
       a := !a mod _base ) ;
     Optint.Infix.(Optint.of_int !b || Optint.of_int !a << 16) )
 
+let unsafe_digest_bytes a o l v = digest ~get:Bytes.unsafe_get a o l v
 let digest_bytes a o l v = digest ~get:Bytes.get a o l v
+let unsafe_digest_string a o l v = digest ~get:String.unsafe_get a o l v
 let digest_string a o l v = digest ~get:String.get a o l v
 
 type bigstring =
   (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
 
+let unsafe_digest_bigstring a o l v = digest ~get:Bigarray.Array1.unsafe_get a o l v
 let digest_bigstring a o l v = digest ~get:Bigarray.Array1.get a o l v

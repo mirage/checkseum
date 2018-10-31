@@ -1,8 +1,6 @@
 (* Copyright (c) 2011, Jonathan Derque - MIT licensed *)
 (* Copyright (c) 2016, Gabriel de Perthuis - MIT licensed *)
 
-type t = Optint.t
-
 let ( &&& ) a b = Optint.logand a b
 let ( ^^^ ) a b = Optint.logxor a b
 let ( >>> ) a b = Optint.shift_right_logical a b
@@ -75,13 +73,22 @@ let update_crc acc c =
   let index = Optint.to_int acc lxor int_of_char c land 0xff in
   crc_table.(index) ^^^ (acc >>> 8) &&& ffffffff
 
-let crc32c : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
+let crc32c : type a. get:(a -> int -> char) -> a -> int -> int -> Optint.t -> Optint.t =
  fun ~get buf off len crc ->
   ~~~(buf_fold_left get update_crc ~~~crc buf off len)
+
+type t = Optint.t
 
 type bigstring =
   (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
 
+let equal a b = Optint.equal a b
+let pp ppf v = Optint.pp ppf v
+let default = Optint.zero
+
 let digest_bigstring a o l v = crc32c ~get:Bigarray.Array1.get a o l v
+let unsafe_digest_bigstring a o l v = crc32c ~get:Bigarray.Array1.unsafe_get a o l v
 let digest_string a o l v = crc32c ~get:String.get a o l v
+let unsafe_digest_string a o l v = crc32c ~get:String.unsafe_get a o l v
 let digest_bytes a o l v = crc32c ~get:Bytes.get a o l v
+let unsafe_digest_bytes a o l v = crc32c ~get:Bytes.unsafe_get a o l v

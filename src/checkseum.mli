@@ -18,11 +18,23 @@ module type S = sig
   (** [digest_bytes msg off len t] is the digest of [msg] at [off] on [len]
       byte(s). *)
 
+  val unsafe_digest_bytes : Bytes.t -> int -> int -> t -> t
+  (** [unsafe_digest_bytes msg off len t] is the same as {!digest_bytes}
+      without bound-checking. *)
+
   val digest_string : String.t -> int -> int -> t -> t
   (** Same as {!digest_bytes} but for {!String.t}. *)
 
+  val unsafe_digest_string : String.t -> int -> int -> t -> t
+  (** [unsafe_digest_string msg off len t] is the same as {!digest_string}
+      without bound-checking. *)
+
   val digest_bigstring : bigstring -> int -> int -> t -> t
   (** Same as {!digest_bigstring} but for {!bigstring}. *)
+
+  val unsafe_digest_bigstring : bigstring -> int -> int -> t -> t
+  (** [unsafe_digest_bigstring msg off len t] is the same as
+      {!digest_bigstring} without bound-checking. *)
 end
 
 (** Implementation of the ADLER-32 cheksum. *)
