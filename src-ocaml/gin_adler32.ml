@@ -1,7 +1,7 @@
 type t = Optint.t
 
-let equal = Optint.equal
-let pp = Optint.pp
+let equal a b = Optint.equal a b
+let pp ppf v = Optint.pp ppf v
 let default = Optint.one
 let _base = 65521
 let _nmax = 5552
@@ -117,17 +117,10 @@ let digest : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
       a := !a mod _base ) ;
     Optint.Infix.(Optint.of_int !b || Optint.of_int !a << 16) )
 
-let digest_bytes =
-  let get = Bytes.get in
-  digest ~get
-
-let digest_string =
-  let get = String.get in
-  digest ~get
+let digest_bytes a o l v = digest ~get:Bytes.get a o l v
+let digest_string a o l v = digest ~get:String.get a o l v
 
 type bigstring =
   (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
 
-let digest_bigstring =
-  let get : bigstring -> int -> char = Bigarray.Array1.get in
-  digest ~get
+let digest_bigstring a o l v = digest ~get:Bigarray.Array1.get a o l v
