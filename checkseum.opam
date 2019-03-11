@@ -23,7 +23,7 @@ build: [
 
 depends: [
   "ocaml"         {>= "4.03.0"}
-  "dune"          {build}
+  "dune"          {build & >= "1.7"}
   "optint"
   "base-bytes"
   "base-bigarray"
