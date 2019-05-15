@@ -3,5 +3,6 @@
  (public_name checkseum)
  (libraries optint)
  (virtual_modules checkseum)
+ (default_implementation checkseum.c)
  (wrapped false)
  (flags (:standard -no-keep-locs)))
