@@ -2,7 +2,7 @@
  (name laolao_freestanding)
  (public_name checkseum.laolao.freestanding)
  (optional)
- (libraries ocaml-freestanding)
+ (libraries bigarray-compat ocaml-freestanding)
  (c_names stubs adler32 crc32c crc32)
  (c_flags (:include cflags.sexp)))
 
