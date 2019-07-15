@@ -2,11 +2,12 @@ open Common
 
 let digest input =
   let encoder, close_input =
+    let default = Checkseum.Crc32.default in
     match input with
-    | `Std -> (X.encoder X.crc32 (`Channel stdin), fun () -> ())
+    | `Std -> (X.encoder X.crc32 ~default (`Channel stdin), fun () -> ())
     | `File file ->
         let ic = open_in file in
-        (X.encoder X.crc32 (`Channel ic), fun () -> close_in ic)
+        (X.encoder X.crc32 ~default (`Channel ic), fun () -> close_in ic)
   in
   let go () =
     match X.encode encoder with

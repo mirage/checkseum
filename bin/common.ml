@@ -17,7 +17,7 @@ module X : sig
   type 'value t
 
   val src : 'value t -> Bytes.t -> int -> int -> unit
-  val encoder : 'value kind -> src -> 'value t
+  val encoder : 'value kind -> default:'value -> src -> 'value t
   val encode : 'value t -> 'value r
   val adler32 : adler32 kind
   val crc32c : crc32c kind
@@ -97,8 +97,8 @@ end = struct
       encoder.value <- value ;
       ret encode encoder
 
-  let encoder : type a. a kind -> src -> a t =
-   fun kind src ->
+  let encoder : type a. a kind -> default:a -> src -> a t =
+   fun kind ~default src ->
     let i, i_off, i_pos, i_len =
       match src with
       | `Manual -> (Bytes.empty, 0, 1, 0)
@@ -111,11 +111,7 @@ end = struct
     ; i_off
     ; i_pos
     ; i_len
-    ; value=
-        ( match kind with
-        | Adler32 -> Checkseum.Adler32.default
-        | Crc32c -> Checkseum.Crc32c.default
-        | Crc32 -> Checkseum.Crc32.default )
+    ; value= default
     ; k= encode }
 
   let encode encoder = encoder.k encoder
