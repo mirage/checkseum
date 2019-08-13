@@ -10,6 +10,10 @@
 - Add ocamlformat support (@dinosaure)
 - _cross-compilation_ adjustement about MirageOS backends (#18, @hannesm)
 
+### v0.0.9 2019-05-16 Paris (France)
+
+- Support Mirage 3
+
 ### v0.0.3 2018-10-15 Paris (France)
 
 - _Dunify_ project
