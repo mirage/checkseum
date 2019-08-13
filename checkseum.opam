@@ -15,15 +15,12 @@ This library use the linking trick to choose between the C implementation (check
 This library is on top of optint to get the best representation of an int32.
 """
 
-build: [
-  [ "dune" "subst" ]
-  [ "dune" "build" "-p" name "-j" jobs ]
-  [ "dune" "runtest" "-p" name "-j" jobs ] {with-test}
-]
+build: [ "dune" "build" "-p" name "-j" jobs ]
+run-test: [ "dune" "runtest" "-p" name "-j" jobs ]
 
 depends: [
   "ocaml"         {>= "4.03.0"}
-  "dune"          {build & >= "1.9.2"}
+  "dune"          {>= "1.9.2"}
   "optint"
   "base-bytes"
   "bigarray-compat"
@@ -41,4 +38,5 @@ depopts: [
 conflicts: [
   "mirage-xen-posix" {< "3.1.0"}
   "ocaml-freestanding" {< "0.4.1"}
+  "mirage" {< "4.0.0"}
 ]
