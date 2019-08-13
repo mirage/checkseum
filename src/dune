@@ -2,6 +2,6 @@
  (name checkseum)
  (public_name checkseum)
  (libraries bigarray-compat optint)
- (virtual_modules checkseum)
- (default_implementation checkseum.c)
+ (modules_without_implementation checkseum)
+ (flags (:standard -no-keep-locs))
  (wrapped false))

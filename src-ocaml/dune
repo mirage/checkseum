@@ -2,5 +2,8 @@
  (name checkseum_ocaml)
  (public_name checkseum.ocaml)
  (libraries bigarray-compat optint)
- (implements checkseum)
+ (flags (:standard -no-keep-locs))
+ (wrapped false)
  (private_modules gin_adler32 gin_crc32 gin_crc32c))
+
+(rule (copy# ../src/checkseum.mli checkseum.mli))
