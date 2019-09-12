@@ -1,11 +1,8 @@
 (* Copyright (c) 2011, Jonathan Derque - MIT licensed *)
 (* Copyright (c) 2016, Gabriel de Perthuis - MIT licensed *)
 
-let ( &&& ) a b = Optint.logand a b
-let ( ^^^ ) a b = Optint.logxor a b
-let ( >>> ) a b = Optint.shift_right_logical a b
-let ffffffff = Optint.(succ (mul max_int (of_int 2)))
-let ( ~~~ ) x = Optint.(logand (lognot x) ffffffff)
+let ffffffff = Optint.of_int32 (-1l)
+let ff = Optint.of_int 0xff
 
 let crc_table =
   Array.map Optint.of_int32
@@ -70,13 +67,13 @@ let buf_fold_left get f acc buf offset length =
   !acc_r
 
 let update_crc acc c =
-  let index = Optint.to_int acc lxor int_of_char c land 0xff in
-  crc_table.(index) ^^^ (acc >>> 8) &&& ffffffff
+  let index = Optint.(to_int (logand acc ff)) lxor int_of_char c land 0xff in
+  Optint.logand (Optint.logxor crc_table.(index) (Optint.shift_right_logical acc 8)) ffffffff
 
 let crc32c : type a.
     get:(a -> int -> char) -> a -> int -> int -> Optint.t -> Optint.t =
  fun ~get buf off len crc ->
-  ~~~(buf_fold_left get update_crc ~~~crc buf off len)
+   Optint.logxor (buf_fold_left get update_crc (Optint.logxor crc ffffffff) buf off len) ffffffff
 
 type t = Optint.t
 
