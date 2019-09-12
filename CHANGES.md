@@ -1,3 +1,18 @@
+### v0.1.1 2019-09-12 Paris (France)
+
+- Compatibility with mirage+dune (#29, @dinosaure)
+- Use `bigarray-compat` (#29, @TheLortex)
+- Add constraints with < mirage-runtime.4.0.0
+
+  `checkseum` (as some others packages) must be used with MirageOS 4
+  where `checkseum.0.9.0` is a compatibility package with Mirage)S 3
+
+- Replace `STDC` macro check by `STDDEF_H_` to be able to compile (#34, @dinosaure)
+  checkseum with +32bit compiler variant (#34, @dinosaure)
+- Use a much more simpler implementation of CRC32C to be compatible with large set of targets (#34, @dinosaure)
+- Avoid fancy operators in OCaml implementation of CRC32 and CRC32C (#34, @dinosaure)
+- Require `optint.0.0.3` at least (#34, @dinosaure)
+
 ### v0.1.0 2019-05-16 Paris (France)
 
 - Use experimental feature of variants with `dune` (#25, @dinosaure, review @rgrinberg)
