@@ -2,7 +2,4 @@
  (name checkseum_c)
  (public_name checkseum.c)
  (libraries bigarray-compat optint checkseum.laolao)
- (flags (:standard -no-keep-locs))
- (wrapped false))
-
-(rule (copy# ../src/checkseum.mli checkseum.mli))
+ (implements checkseum))
