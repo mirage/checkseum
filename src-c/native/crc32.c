@@ -532,7 +532,7 @@ static unsigned long crc32_big(unsigned long crc, const unsigned char * buf, siz
     len--;
   }
 
-  buf4 = (const crc_t *)(cost void *)buf; /* Obj.magic */
+  buf4 = (const crc_t *)(const void *)buf; /* Obj.magic */
 
   while (len >= 32) {
     DOBIG32;

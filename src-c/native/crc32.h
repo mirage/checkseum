@@ -5,7 +5,7 @@
 #include "size_t.h"
 #include "ptrdiff_t.h"
 
-#if !defined(CHECKSEUM_U4) && !defined(CHECKSEUM_SOLO) && defined(STDC)
+#if !defined(CHECKSEUM_U4) && !defined(CHECKSEUM_SOLO)
 #  include <limits.h>
 #  if (UINT_MAX == 0xffffffffUL)
 #    define CHECKSEUM_U4 unsigned
