@@ -9,13 +9,17 @@ doc:          "https://mirage.github.io/checkseum/"
 license:      "MIT"
 synopsis:     "Adler-32, CRC32 and CRC32-C implementation in C and OCaml"
 description: """
-Checkseum is a library to provide implementation of Adler-32, CRC32 and CRC32-C in C and OCaml.
+Checkseum is a library to provide implementation of Adler-32, CRC32 and CRC32-C
+in C and OCaml.
 
-This library use the linking trick to choose between the C implementation (checkseum.c) or the OCaml implementation (checkseum.ocaml).
-This library is on top of optint to get the best representation of an int32.
-"""
+This library use the linking trick to choose between the C implementation
+(checkseum.c) or the OCaml implementation (checkseum.ocaml). This library is on
+top of optint to get the best representation of an int32. """
 
-build: [ "dune" "build" "-p" name "-j" jobs ]
+build: [
+  [ "dune" "build" "-p" name "-j" jobs ]
+  [ "patch" "-p1" "-i" "META.patch" ]
+]
 run-test: [ "dune" "runtest" "-p" name "-j" jobs ]
 
 depends: [
@@ -24,9 +28,6 @@ depends: [
   "optint"        {>= "0.0.3"}
   "base-bytes"
   "bigarray-compat"
-  "fmt"
-  "rresult"
-  "cmdliner"
   "alcotest"      {with-test}
 ]
 
@@ -38,5 +39,4 @@ depopts: [
 conflicts: [
   "mirage-xen-posix" {< "3.1.0"}
   "ocaml-freestanding" {< "0.4.3"}
-  "mirage-runtime" {< "4.0.0"}
 ]

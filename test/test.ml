@@ -1,10 +1,10 @@
-let make ~name (module X : Checkseum.S) input expected =
-  let checkseum = Alcotest.testable X.pp X.equal in
+let make ~name (module M : Checkseum.S) input expected =
+  let checkseum = Alcotest.testable M.pp M.equal in
   ( name
   , `Quick
   , fun () ->
       Alcotest.check checkseum name
-        X.(digest_string input 0 (String.length input) default)
+        M.(digest_string input 0 (String.length input) default)
         expected )
 
 let () =
