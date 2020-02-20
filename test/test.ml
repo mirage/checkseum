@@ -1,5 +1,5 @@
 let make ~name (module M : Checkseum.S) input expected =
-  let checkseum = Alcotest.testable X.pp X.equal in
+  let checkseum = Alcotest.testable M.pp M.equal in
   ( name
   , `Quick
   , fun () ->
