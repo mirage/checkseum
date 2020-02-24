@@ -23,6 +23,10 @@ build: [
   [ "dune" "runtest" "-p" name "-j" jobs ] {with-test}
 ]
 
+install: [
+  [ "./test/test_runes.ml" ] {with-test}
+]
+
 depends: [
   "ocaml"         {>= "4.07.0"}
   "dune"          {>= "1.9.2"}
@@ -30,6 +34,12 @@ depends: [
   "base-bytes"
   "bigarray-compat"
   "alcotest"      {with-test}
+  "bos"           {with-test}
+  "astring"       {with-test}
+  "fmt"           {with-test}
+  "fpath"         {with-test}
+  "rresult"       {with-test}
+  "ocamlfind"     {with-test}
 ]
 
 depopts: [
