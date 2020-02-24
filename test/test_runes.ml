@@ -104,19 +104,31 @@ let libraries_exist args =
       | false -> R.error_msgf "Library <%a> does not exist." Fpath.pp path in
   go libraries
 
+let exists lib =
+  let open Bos in
+  let command = Cmd.(v "ocamlfind" % "query" % lib) in
+  OS.Cmd.run_out command |> OS.Cmd.out_null
+  >>= function
+  | ((), (_, `Exited 0)) -> R.ok true
+  | _ -> R.ok false
+
 let query target lib =
   let open Bos in
   let format = Fmt.strf "-L%%d %%(%s_linkopts)" target in
   let command = Cmd.(v "ocamlfind" % "query" % "-format" % format % lib) in
-  OS.Cmd.run_out command
-  |> OS.Cmd.out_lines
-  >>| fst
+  OS.Cmd.run_out command |> OS.Cmd.out_lines
+  >>= (function (output, (_, `Exited 0)) -> R.ok output
+              | _ -> R.error_msgf "<ocamlfind> does not properly exit.")
   >>| String.concat " "
   >>| Astring.String.cuts ~sep:" " ~empty:false
 
 let run () =
-  query "xen" "checkseum" >>= parse_lL_args >>= libraries_exist >>= fun () ->
-  query "freestanding" "checkseum" >>= parse_lL_args >>= libraries_exist >>= fun () ->
+  ( exists "mirage-xen-posix" >>= function
+  | true -> query "xen" "checkseum" >>= parse_lL_args >>= libraries_exist
+  | false -> R.ok () ) >>= fun () ->
+  ( exists "ocaml-freestanding" >>= function
+  | true -> query "freestanding" "checkseum" >>= parse_lL_args >>= libraries_exist
+  | false -> R.ok () ) >>= fun () ->
   R.ok ()
 
 let exit_success = 0
