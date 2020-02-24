@@ -18,9 +18,14 @@ top of optint to get the best representation of an int32. """
 
 build: [
   [ "dune" "build" "-p" name "-j" jobs ]
-  [ "sh" "-exc" "echo xen_linkopts = \"-l:laolao/xen/liblaolao_xen_stubs.a\" >> _build/default/META.checkseum"]
-  [ "sh" "-exc" "echo freestanding_linkopts = \"-l:laolao/freestanding/liblaolao_freestanding_stubs.a\" >> _build/default/META.checkseum"]
+  [ "sh" "-exc" "echo \"xen_linkopts = \\\"-l:laolao/xen/liblaolao_xen_stubs.a\\\"\" >> _build/default/META.checkseum"]
+  [ "sh" "-exc" "echo \"freestanding_linkopts = \\\"-l:laolao/freestanding/liblaolao_freestanding_stubs.a\\\"\" >> _build/default/META.checkseum"]
   [ "dune" "runtest" "-p" name "-j" jobs ] {with-test}
+]
+
+install: [
+  [ "dune" "install" "-p" name ]
+  [ "./test/test_runes.ml" ] {with-test}
 ]
 
 depends: [
@@ -30,6 +35,12 @@ depends: [
   "base-bytes"
   "bigarray-compat"
   "alcotest"      {with-test}
+  "bos"           {with-test}
+  "astring"       {with-test}
+  "fmt"           {with-test}
+  "fpath"         {with-test}
+  "rresult"       {with-test}
+  "ocamlfind"     {with-test}
 ]
 
 depopts: [
