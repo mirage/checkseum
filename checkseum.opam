@@ -24,6 +24,7 @@ build: [
 ]
 
 install: [
+  [ "dune" "install" "-p" name ]
   [ "./test/test_runes.ml" ] {with-test}
 ]
 
