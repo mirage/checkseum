@@ -6,79 +6,41 @@
 #ifdef ARCH_SIXTYFOUR
 /* XXX(dinosaure): un-allocated version for 64-bits architecture. */
 
-CAMLprim value
-caml_checkseum_adler32_ba(value t, value src, value off, value len)
-{
-  return (Val_int (adler32(Int_val (t), _ba_uint8_off (src, off), Int_val (len))));
-}
+#define __define_checkseum(name)                                                                \
+	CAMLprim value                                                                          \
+        caml_checkseum_ ## name ## _ba(value t, value src, value off, value len) {              \
+          intnat res = checkseum_ ## name ## _digest (Int_val (t), _ba_uint8_off (src, off), Int_val (len)) ; \
+	  return (Val_int (res)); \
+	}                                                                                       \
+                                                                                                \
+        CAMLprim value                                                                          \
+        caml_checkseum_ ## name ## _st(value t, value src, value off, value len) {              \
+          intnat res = checkseum_ ## name ## _digest (Int_val (t), _st_uint8_off (src, off), Int_val (len)) ; \
+	  return (Val_int (res)); \
+        }
 
-CAMLprim value
-caml_checkseum_adler32_st(value t, value src, value off, value len)
-{
-  return (Val_int (adler32(Int_val (t), _st_uint8_off (src, off), Int_val (len))));
-}
-
-CAMLprim value
-caml_checkseum_crc32c_ba(value t, value src, value off, value len)
-{
-  return (Val_int (crc32c(Int_val (t), _ba_uint8_off (src, off), Int_val (len))));
-}
-
-CAMLprim value
-caml_checkseum_crc32c_st(value t, value src, value off, value len)
-{
-  return (Val_int (crc32c(Int_val (t), _st_uint8_off (src, off), Int_val (len))));
-}
-
-CAMLprim value
-caml_checkseum_crc32_ba(value t, value src, value off, value len)
-{
-  return (Val_int (crc32(Int_val (t), _ba_uint8_off (src, off), Int_val (len))));
-}
-
-CAMLprim value
-caml_checkseum_crc32_st(value t, value src, value off, value len)
-{
-  return (Val_int (crc32(Int_val (t), _st_uint8_off (src, off), Int_val (len))));
-}
+__define_checkseum (adler32)
+__define_checkseum (crc32c)
+__define_checkseum (crc32)
 
 #else
 /* XXX(dinosaure): allocated version for 32-bits architecture. */
 
-CAMLprim value
-caml_checkseum_adler32_ba(value t, value src, value off, value len)
-{
-  return (copy_int32(adler32(Int32_val (t), _ba_uint8_off (src, off), Int_val (len))));
-}
+#define __define_checkseum(name)                                                                     \
+	CAMLprim value                                                                               \
+        caml_checkseum_ ## name ## _ba(value t, value src, value off, value len) {                   \
+	  uint32_t res = checkseum_ ## name ## _digest (Int32_val (t), _ba_uint8_off (src, off), Int_val (len)) \
+	  return (copy_int32 (res)); \
+	}                                                                                            \
+                                                                                                     \
+        CAMLprim value                                                                               \
+        caml_checkseum_ ## name ## _st(value t, value src, value off, value len) {                   \
+	  uint32_t res = checkseum_ ## name ## _digest (Int32_val (t), _st_uint8_off (src, off), Int_val (len)) \
+	  return (copy_int32 (res)); \
+        }
 
-CAMLprim value
-caml_checkseum_adler32_st(value t, value src, value off, value len)
-{
-  return (copy_int32(adler32(Int32_val (t), _st_uint8_off (src, off), Int_val (len))));
-}
-
-CAMLprim value
-caml_checkseum_crc32c_ba(value t, value src, value off, value len)
-{
-  return (copy_int32(crc32c(Int32_val (t), _ba_uint8_off (src, off), Int_val (len))));
-}
-
-CAMLprim value
-caml_checkseum_crc32c_st(value t, value src, value off, value len)
-{
-  return (copy_int32(crc32c(Int32_val (t), _st_uint8_off (src, off), Int_val (len))));
-}
-
-CAMLprim value
-caml_checkseum_crc32_ba(value t, value src, value off, value len)
-{
-  return (copy_int32(crc32(Int32_val (t), _ba_uint8_off (src, off), Int_val (len))));
-}
-
-CAMLprim value
-caml_checkseum_crc32_st(value t, value src, value off, value len)
-{
-  return (copy_int32(crc32(Int32_val (t), _st_uint8_off (src, off), Int_val (len))));
-}
+__define_checkseum (adler32)
+__define_checkseum (crc32c)
+__define_checkseum (crc32)
 
 #endif
