@@ -2,6 +2,7 @@
 #include "adler32.h"
 #include "crc32c.h"
 #include "crc32.h"
+#include "crc24.h"
 
 #ifdef ARCH_SIXTYFOUR
 /* XXX(dinosaure): un-allocated version for 64-bits architecture. */
@@ -22,6 +23,7 @@
 __define_checkseum (adler32)
 __define_checkseum (crc32c)
 __define_checkseum (crc32)
+__define_checkseum (crc24)
 
 #else
 /* XXX(dinosaure): allocated version for 32-bits architecture. */
@@ -42,5 +44,6 @@ __define_checkseum (crc32)
 __define_checkseum (adler32)
 __define_checkseum (crc32c)
 __define_checkseum (crc32)
+__define_checkseum (crc24)
 
 #endif

@@ -48,6 +48,16 @@ module Crc32c_foreign : FOREIGN = struct
     = "caml_checkseum_crc32c_ba"
 end
 
+module Crc24_foreign : FOREIGN = struct
+  external unsafe_bytes :
+    optint -> st -> off -> len -> optint
+    = "caml_checkseum_crc24_st"
+
+  external unsafe_bigstring :
+    optint -> ba -> off -> len -> optint
+    = "caml_checkseum_crc24_ba"
+end
+
 module Make (F : FOREIGN) (D : DESC) = struct
   type t = optint
 
@@ -96,7 +106,11 @@ end
 module Adler32 : S =
   Make (Adler32_foreign) (struct let default = Optint.one end)
 
-module Crc32 : S = Make (Crc32_foreign) (struct let default = Optint.zero end)
+module Crc32 : S =
+  Make (Crc32_foreign) (struct let default = Optint.zero end)
 
 module Crc32c : S =
   Make (Crc32c_foreign) (struct let default = Optint.zero end)
+
+module Crc24 : S =
+  Make (Crc24_foreign) (struct let default = Optint.of_int 0xb704ce end)
