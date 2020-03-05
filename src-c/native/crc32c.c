@@ -67,7 +67,7 @@ uint32_t table[256] = {
  0xBE2DA0A5L, 0x4C4623A6L, 0x5F16D052L, 0xAD7D5351L
 };
 
-uint32_t crc32c(uint32_t crc, const void *buf, size_t len)
+uint32_t checkseum_crc32c_digest(uint32_t crc, const void *buf, size_t len)
 {
 	const uint8_t *p = buf;
 

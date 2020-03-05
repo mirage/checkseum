@@ -22,6 +22,6 @@ typedef CHECKSEUM_U4 crc_t;
 typedef unsigned long crc_t;
 #endif
 
-uint32_t crc32(uint32_t crc, const unsigned char *buf, size_t len);
+uint32_t checkseum_crc32_digest(uint32_t crc, const unsigned char *buf, size_t len);
 
 #endif
