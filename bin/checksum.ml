@@ -9,11 +9,13 @@ let io_buffer_size = 65536
 type adler32 = Checkseum.Adler32.t
 type crc32c = Checkseum.Crc32c.t
 type crc32 = Checkseum.Crc32.t
+type crc24 = Checkseum.Crc24.t
 
 type 'kind kind =
   | Adler32 : adler32 kind
   | Crc32c : crc32c kind
   | Crc32 : crc32 kind
+  | Crc24 : crc24 kind
 
 module Checksum : sig
   type src = [`Channel of in_channel | `Manual | `String of string]
@@ -74,6 +76,7 @@ end = struct
     | Adler32 -> Checkseum.Adler32.digest_string src (off + pos) rem t
     | Crc32c -> Checkseum.Crc32c.digest_string src (off + pos) rem t
     | Crc32 -> Checkseum.Crc32.digest_string src (off + pos) rem t
+    | Crc24 -> Checkseum.Crc24.digest_string src (off + pos) rem t
 
   let i_rem encoder = encoder.i_len - encoder.i_pos + 1
 
@@ -121,6 +124,7 @@ let kind_of_string x = match String.lowercase_ascii x with
   | "adler32" -> Ok (Kind (Adler32, Checkseum.Adler32.default))
   | "crc32c" -> Ok (Kind (Crc32c, Checkseum.Crc32c.default))
   | "crc32" -> Ok (Kind (Crc32, Checkseum.Crc32.default))
+  | "crc24" -> Ok (Kind (Crc24, Checkseum.Crc24.default))
   | _ -> error_msgf "Invalid kind of checksum: %S." x
 
 let open_in filename =
@@ -132,6 +136,7 @@ let pp : type k. k kind -> Format.formatter -> k -> unit = function
   | Adler32 -> Checkseum.Adler32.pp
   | Crc32c -> Checkseum.Crc32c.pp
   | Crc32 -> Checkseum.Crc32.pp
+  | Crc24 -> Checkseum.Crc24.pp
 
 let () = match Sys.argv with
   | [| _; kind; filename; |] ->
