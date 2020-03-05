@@ -24,6 +24,7 @@
 #define MOD28(a) a %= BASE
 #define MOD63(a) a %= BASE
 
+static
 uLong _adler32(adler, buf, len)
      uLong adler;
      const Bytef *buf;
