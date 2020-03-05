@@ -38,4 +38,11 @@ let () =
         ; make ~name:"4"
             (module Checkseum.Crc32)
             "Thou hast made me, and shall thy work decay?"
-            (Optint.of_int32 0xf1fabe1dl) ] ) ]
+            (Optint.of_int32 0xf1fabe1dl) ] )
+    ; ( "crc24"
+      , [ make ~name:"0" (module Checkseum.Crc24) "" (Optint.of_int 0xb704ce)
+        ; make ~name:"1" (module Checkseum.Crc24) "a" (Optint.of_int 0xf25713)
+        ; make ~name:"2" (module Checkseum.Crc24) "abc"
+          (Optint.of_int 0xba1c7b)
+        ; make ~name:"3" (module Checkseum.Crc24) "message digest"
+          (Optint.of_int 0xdbf0b6) ] ) ]
