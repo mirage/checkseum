@@ -45,3 +45,6 @@ module Crc32c : S
 
 (** Implementation of CRC32 checksum. *)
 module Crc32 : S
+
+(** Implementation of CRC24 checksum. *)
+module Crc24 : S
