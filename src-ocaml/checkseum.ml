@@ -18,3 +18,4 @@ end
 module Adler32 : S = Gin_adler32
 module Crc32c : S = Gin_crc32c
 module Crc32 : S = Gin_crc32
+module Crc24 : S = Gin_crc24
