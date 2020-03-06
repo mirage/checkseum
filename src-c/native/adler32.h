@@ -32,6 +32,6 @@ typedef unsigned int  uInt;
 typedef unsigned char Byte;
 typedef Byte FAR Bytef;
 
-uLong adler32(uLong adler, const Bytef *buf, uInt len);
+uLong checkseum_adler32_digest(uLong adler, const Bytef *buf, uInt len);
 
 #endif

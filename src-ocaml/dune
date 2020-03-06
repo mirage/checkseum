@@ -3,4 +3,4 @@
  (public_name checkseum.ocaml)
  (libraries bigarray-compat optint)
  (implements checkseum)
- (private_modules gin_adler32 gin_crc32 gin_crc32c))
+ (private_modules gin_adler32 gin_crc32 gin_crc32c gin_crc24))

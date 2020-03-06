@@ -24,6 +24,7 @@
 #define MOD28(a) a %= BASE
 #define MOD63(a) a %= BASE
 
+static
 uLong _adler32(adler, buf, len)
      uLong adler;
      const Bytef *buf;
@@ -96,7 +97,7 @@ uLong _adler32(adler, buf, len)
   return (adler | (sum2 << 16));
 }
 
-uLong adler32(adler, buf, len)
+uLong checkseum_adler32_digest(adler, buf, len)
      uLong adler;
      const Bytef *buf;
      uInt len;
