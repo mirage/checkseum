@@ -161,4 +161,4 @@ let () = match Sys.argv with
       | Ok () -> ()
       | Error (`Msg err) -> Format.eprintf "%s\n%!" err )
   | _ ->
-    Format.eprintf "%s {adler32,crc32,crc32c} [filename]\n%!" Sys.argv.(0)
+    Format.eprintf "%s {adler32,crc32,crc32c,crc24} [filename]\n%!" Sys.argv.(0)

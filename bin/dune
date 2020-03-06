@@ -1,4 +1,4 @@
 (executable
- (name checksum)
+ (name main)
  (public_name checkseum.checkseum)
  (libraries checkseum))
