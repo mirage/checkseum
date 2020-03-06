@@ -1,3 +1,19 @@
+### v0.2.0 2020-06-03 Paris (France)
+
+- add CRC-24 (#43, @dinosaure, @cfcs)
+- factorize C stubs (as digestif)
+- avoid clash of names when we use `checkseum.c`
+  Any functions are prefixed by `checkseum_`
+- fix META file (#39 & #41, @hannesm, @dinosaure)
+  A test was added to see if runes (static C libraries) are available for
+  MirageOS targets (freestanding & xen)
+- provide a binary `checkseum` to _digest_ standard input or file
+  `checkseum.checkseum` is available to compute check-sum of standard input
+  or file. The tool is used only for debugging.
+- clean distribution (#38, @dinosaure)
+  `checkseum` depends only on `bigarray-compat`, `base-bytes` & `optint`
+- `limits.h` is available on any targets (#37, @dinosaure, @pirbo)
+
 ### v0.1.1 2019-09-12 Paris (France)
 
 - Compatibility with mirage+dune (#29, @dinosaure)
