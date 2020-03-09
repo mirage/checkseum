@@ -2,8 +2,8 @@
 #define CHECKSEUM_SIZE_T
 
 #if defined(NO_SIZE_T)
-typedef unsigned NO_SIZE_T size_t;
-#elif defined(_STDDEF_H)
+typedef unsigned NO_SIZE_T size_t; /* user-defined size_t */
+#elif defined(CHECKSEUM_STDDEF) && !defined(CHECKSEUM_NO_STDDEF)
 #  include <stddef.h>
 #elif defined(WIN32)
 #  include <BaseTsd.h> /* XXX(dinosaure): see checkseum#7 */

@@ -31,13 +31,13 @@ __define_checkseum (crc24)
 #define __define_checkseum(name)                                                                     \
 	CAMLprim value                                                                               \
         caml_checkseum_ ## name ## _ba(value t, value src, value off, value len) {                   \
-	  uint32_t res = checkseum_ ## name ## _digest (Int32_val (t), _ba_uint8_off (src, off), Int_val (len)) \
+	  uint32_t res = checkseum_ ## name ## _digest (Int32_val (t), _ba_uint8_off (src, off), Int_val (len)) ; \
 	  return (copy_int32 (res)); \
 	}                                                                                            \
                                                                                                      \
         CAMLprim value                                                                               \
         caml_checkseum_ ## name ## _st(value t, value src, value off, value len) {                   \
-	  uint32_t res = checkseum_ ## name ## _digest (Int32_val (t), _st_uint8_off (src, off), Int_val (len)) \
+	  uint32_t res = checkseum_ ## name ## _digest (Int32_val (t), _st_uint8_off (src, off), Int_val (len)) ; \
 	  return (copy_int32 (res)); \
         }
 
