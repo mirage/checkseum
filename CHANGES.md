@@ -1,5 +1,6 @@
 ### v0.2.0 2020-06-03 Paris (France)
 
+- fix cross-compilation with `dune -x windows` (#45, @dinosaure, @pirbo)
 - add CRC-24 (#43, @dinosaure, @cfcs)
 - factorize C stubs (as digestif)
 - avoid clash of names when we use `checkseum.c`
