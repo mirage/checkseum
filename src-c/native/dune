@@ -2,4 +2,6 @@
  (name laolao)
  (public_name checkseum.laolao)
  (c_names stubs adler32 crc32c crc32 crc24)
- (c_flags (:standard -I.)))
+ (c_flags (:include stddef.sexp) (:standard -I.)))
+
+(rule (with-stdout-to stddef.sexp (run ../../conf/check.exe)))
