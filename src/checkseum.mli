@@ -1,9 +1,12 @@
 type bigstring =
-  (char, Bigarray_compat.int8_unsigned_elt, Bigarray_compat.c_layout) Bigarray_compat.Array1.t
+  ( char,
+    Bigarray_compat.int8_unsigned_elt,
+    Bigarray_compat.c_layout )
+  Bigarray_compat.Array1.t
 
 module type S = sig
-  (** Representation of the checksum value. *)
   type t = Optint.t
+  (** Representation of the checksum value. *)
 
   val pp : Format.formatter -> t -> unit
   (** Pretty-printer of {!t}. *)
@@ -19,8 +22,8 @@ module type S = sig
       byte(s). *)
 
   val unsafe_digest_bytes : Bytes.t -> int -> int -> t -> t
-  (** [unsafe_digest_bytes msg off len t] is the same as {!digest_bytes}
-      without bound-checking. *)
+  (** [unsafe_digest_bytes msg off len t] is the same as {!digest_bytes} without
+      bound-checking. *)
 
   val digest_string : String.t -> int -> int -> t -> t
   (** Same as {!digest_bytes} but for {!String.t}. *)
@@ -33,18 +36,18 @@ module type S = sig
   (** Same as {!digest_bigstring} but for {!bigstring}. *)
 
   val unsafe_digest_bigstring : bigstring -> int -> int -> t -> t
-  (** [unsafe_digest_bigstring msg off len t] is the same as
-      {!digest_bigstring} without bound-checking. *)
+  (** [unsafe_digest_bigstring msg off len t] is the same as {!digest_bigstring}
+      without bound-checking. *)
 end
 
-(** Implementation of the ADLER-32 cheksum. *)
 module Adler32 : S
+(** Implementation of the ADLER-32 cheksum. *)
 
-(** Implementation of the CRC32C checksum. *)
 module Crc32c : S
+(** Implementation of the CRC32C checksum. *)
 
-(** Implementation of CRC32 checksum. *)
 module Crc32 : S
+(** Implementation of CRC32 checksum. *)
 
-(** Implementation of CRC24 checksum. *)
 module Crc24 : S
+(** Implementation of CRC24 checksum. *)

@@ -2,9 +2,12 @@
  (name test)
  (libraries checkseum.c alcotest))
 
-(rule (copy# ../test.ml test.ml))
+(rule
+ (copy# ../test.ml test.ml))
 
-(alias
- (name runtest)
- (deps (:test test.exe))
- (action (run %{test} --color=always)))
+(rule
+ (alias runtest)
+ (deps
+  (:test test.exe))
+ (action
+  (run %{test} --color=always)))
