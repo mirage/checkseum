@@ -4,7 +4,7 @@
 
 (rule (copy# ../test.ml test.ml))
 
-(alias
- (name runtest)
+(rule
+ (alias runtest)
  (deps (:test test.exe))
  (action (run %{test} --color=always)))
