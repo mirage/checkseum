@@ -1,3 +1,7 @@
+### v0.2.1 2020-06-15 Paris (France)
+
+- Move to dune.2.6.0 (#47)
+
 ### v0.2.0 2020-06-03 Paris (France)
 
 - fix cross-compilation with `dune -x windows` (#45, @dinosaure, @pirbo)
