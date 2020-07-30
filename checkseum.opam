@@ -40,7 +40,7 @@ depends: [
   "fmt"           {with-test}
   "fpath"         {with-test}
   "rresult"       {with-test}
-  "ocamlfind"     {build & with-test}
+  "ocamlfind"     {with-test}
 ]
 
 depopts: [
