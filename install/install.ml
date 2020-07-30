@@ -1,7 +1,6 @@
 #!/usr/bin/env ocaml
 
-#use "topfind" ;;
-#require "unix" ;;
+#load "unix.cma" ;;
 
 let xen = "xen_linkopts = \"-l:laolao/xen/liblaolao_xen_stubs.a\""
 let freestanding = "freestanding_linkopts = \"-l:laolao/freestanding/liblaolao_freestanding_stubs.a\""
