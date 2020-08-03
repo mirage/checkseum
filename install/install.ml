@@ -1,10 +1,16 @@
 #!/usr/bin/env ocaml
 
-#load "unix.cma" ;;
+;;
+#load "unix.cma"
 
 let xen = "xen_linkopts = \"-l:laolao/xen/liblaolao_xen_stubs.a\""
-let freestanding = "freestanding_linkopts = \"-l:laolao/freestanding/liblaolao_freestanding_stubs.a\""
-let meta = match Sys.getenv_opt "DUNE_BUILD_DIR" with
+
+let freestanding =
+  "freestanding_linkopts = \
+   \"-l:laolao/freestanding/liblaolao_freestanding_stubs.a\""
+
+let meta =
+  match Sys.getenv_opt "DUNE_BUILD_DIR" with
   | Some _build -> _build ^ "/default/META.checkseum"
   | None -> "_build/default/META.checkseum"
 
