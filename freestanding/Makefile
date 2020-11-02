@@ -13,7 +13,7 @@ CC ?= cc
 FREESTANDING_CFLAGS := $(shell PKG_CONFIG_PATH=$(PKG_CONFIG_PATH) pkg-config --cflags ocaml-freestanding)
 CFLAGS := -I../src-c/native -O3 $(FREESTANDING_CFLAGS)
 
-OBJS= adler32.o crc24.o crc32.o stubs.o
+OBJS= adler32.o crc24.o crc32.o crc32c.o stubs.o
 
 libcheckseum_freestanding_stubs.a: $(OBJS)
 	$(AR) r $@ $^
