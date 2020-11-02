@@ -49,6 +49,6 @@ depopts: [
 ]
 
 conflicts: [
-  "mirage-xen-posix" {< "6.0.0"}
+  "mirage-xen" {< "6.0.0"}
   "ocaml-freestanding" {< "0.4.3"}
 ]
