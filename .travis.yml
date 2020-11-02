@@ -9,7 +9,7 @@ env:
     - PACKAGE="checkseum"
   matrix:
   - OCAML_VERSION=4.07 TEST=true
-  - OCAML_VERSION=4.07 TEST=false DEPOPTS="mirage-xen-posix"
-  - OCAML_VERSION=4.07 TEST=false DEPOPTS="ocaml-freestanding"
   - OCAML_VERSION=4.08 TEST=true
+  - OCAML_VERSION=4.08 TEST=true DEPOPTS="ocaml-freestanding"
   - OCAML_VERSION=4.09 TEST=true
+  - OCAML_VERSION=4.09 TEST=false POST_INSTALL_HOOK=./.test-mirage.sh
