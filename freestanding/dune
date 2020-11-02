@@ -1,4 +1,4 @@
-(copy_files# ../src-c/native/*)
+(copy_files# ../src-c/native/*.c)
 
 (rule
  (deps adler32.c crc24.c crc32.c stubs.c Makefile)
