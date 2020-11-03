@@ -1,3 +1,8 @@
+### v0.3.0 2020-11-03 Paris (France)
+
+- Upgrade C artifacts with MirageOS 3.9 (#50, @dinosaure, @hannesm)
+- Fix `esy` installation (#49, @dinosaure, @jordwalke, reported by @Faliszek)
+
 ### v0.2.1 2020-06-15 Paris (France)
 
 - Move to dune.2.6.0 (#47)
