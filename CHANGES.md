@@ -1,3 +1,7 @@
+### v0.3.1 2021-23-02 Paris (France)
+
+- Upgrade `checkseum` to `optint.0.0.5` (@dinosaure, #51)
+
 ### v0.3.0 2020-11-03 Paris (France)
 
 - Upgrade C artifacts with MirageOS 3.9 (#50, @dinosaure, @hannesm)
