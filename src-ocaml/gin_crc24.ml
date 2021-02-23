@@ -1,8 +1,8 @@
-let _1000000 = Optint.of_int 0x1000000
+let _1000000 = Optint.of_unsigned_int 0x1000000
 
-let _ffffff = Optint.of_int 0xffffff
+let _ffffff = Optint.of_unsigned_int 0xffffff
 
-let _crc24_poly = Optint.of_int 0x1864cfb
+let _crc24_poly = Optint.of_unsigned_int 0x1864cfb
 
 let crc24 :
     type a. get:(a -> int -> char) -> a -> int -> int -> Optint.t -> Optint.t =
@@ -10,7 +10,7 @@ let crc24 :
   let crc = ref crc in
   for i = 0 to len - 1 do
     crc :=
-      Optint.logxor !crc (Optint.of_int (Char.code (get buf (off + i)) lsl 16)) ;
+      Optint.logxor !crc (Optint.of_unsigned_int (Char.code (get buf (off + i)) lsl 16)) ;
     for _ = 0 to 7 do
       crc := Optint.shift_left !crc 1 ;
       if Optint.logand !crc _1000000 <> Optint.zero
@@ -31,7 +31,7 @@ let equal a b = Optint.equal a b
 
 let pp ppf v = Optint.pp ppf v
 
-let default = Optint.of_int 0xb704ce
+let default = Optint.of_unsigned_int 0xb704ce
 
 let digest_bigstring a o l v = crc24 ~get:Bigarray_compat.Array1.get a o l v
 

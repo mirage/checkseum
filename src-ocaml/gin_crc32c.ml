@@ -1,12 +1,12 @@
 (* Copyright (c) 2011, Jonathan Derque - MIT licensed *)
 (* Copyright (c) 2016, Gabriel de Perthuis - MIT licensed *)
 
-let ffffffff = Optint.of_int32 (-1l)
+let ffffffff = Optint.of_unsigned_int32 (-1l)
 
-let ff = Optint.of_int 0xff
+let ff = Optint.of_unsigned_int 0xff
 
 let crc_table =
-  Array.map Optint.of_int32
+  Array.map Optint.of_unsigned_int32
     [|
       0x00000000l;
       0xf26b8303l;
@@ -274,7 +274,7 @@ let buf_fold_left get f acc buf offset length =
   !acc_r
 
 let update_crc acc c =
-  let index = Optint.(to_int (logand acc ff)) lxor int_of_char c land 0xff in
+  let index = Optint.(to_unsigned_int (logand acc ff)) lxor int_of_char c land 0xff in
   Optint.logand
     (Optint.logxor crc_table.(index) (Optint.shift_right_logical acc 8))
     ffffffff
