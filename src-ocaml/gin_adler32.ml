@@ -12,8 +12,8 @@ let _nmax = 5552
 
 let digest : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
  fun ~get buf off len adler32 ->
-  let a = ref Optint.(to_int Infix.(adler32 >> 16 && of_int 0xFFFF)) in
-  let b = ref Optint.(to_int Infix.(adler32 && of_int 0xFFFF)) in
+  let a = ref Optint.(to_unsigned_int Infix.(adler32 >> 16 && of_int 0xFFFF)) in
+  let b = ref Optint.(to_unsigned_int Infix.(adler32 && of_int 0xFFFF)) in
   let l = ref len in
   let o = ref off in
   if len = 0
@@ -24,7 +24,7 @@ let digest : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
     if !b >= _base then b := !b - _base ;
     a := !a + !b ;
     if !a >= _base then a := !a - _base ;
-    Optint.Infix.(Optint.of_int !b || Optint.of_int !a << 16))
+    Optint.Infix.(Optint.of_unsigned_int !b || Optint.of_unsigned_int !a << 16))
   else if len < 16
   then (
     while !l <> 0 do
@@ -35,7 +35,7 @@ let digest : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
     done ;
     if !b >= _base then b := !b - _base ;
     a := !a mod _base ;
-    Optint.Infix.(Optint.of_int !b || Optint.of_int !a << 16))
+    Optint.Infix.(Optint.of_unsigned_int !b || Optint.of_unsigned_int !a << 16))
   else (
     while !l >= _nmax do
       l := !l - _nmax ;
@@ -123,7 +123,7 @@ let digest : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
       done ;
       b := !b mod _base ;
       a := !a mod _base) ;
-    Optint.Infix.(Optint.of_int !b || Optint.of_int !a << 16))
+    Optint.Infix.(Optint.of_unsigned_int !b || Optint.of_unsigned_int !a << 16))
 
 let unsafe_digest_bytes a o l v = digest ~get:Bytes.unsafe_get a o l v
 
