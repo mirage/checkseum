@@ -15,7 +15,8 @@ let () =
           make ~name:"0" (module Checkseum.Crc32c) "" Optint.zero;
           make ~name:"1"
             (module Checkseum.Crc32c)
-            "\x00" (Optint.of_unsigned_int32 0x527d5351l);
+            "\x00"
+            (Optint.of_unsigned_int32 0x527d5351l);
           make ~name:"2"
             (module Checkseum.Crc32c)
             "\xff\xff\xff\xff"
@@ -51,11 +52,21 @@ let () =
         ] );
       ( "crc24",
         [
-          make ~name:"0" (module Checkseum.Crc24) "" (Optint.of_unsigned_int32 0xb704cel);
-          make ~name:"1" (module Checkseum.Crc24) "a" (Optint.of_unsigned_int32 0xf25713l);
-          make ~name:"2" (module Checkseum.Crc24) "abc" (Optint.of_unsigned_int32 0xba1c7bl);
+          make ~name:"0"
+            (module Checkseum.Crc24)
+            ""
+            (Optint.of_unsigned_int32 0xb704cel);
+          make ~name:"1"
+            (module Checkseum.Crc24)
+            "a"
+            (Optint.of_unsigned_int32 0xf25713l);
+          make ~name:"2"
+            (module Checkseum.Crc24)
+            "abc"
+            (Optint.of_unsigned_int32 0xba1c7bl);
           make ~name:"3"
             (module Checkseum.Crc24)
-            "message digest" (Optint.of_unsigned_int32 0xdbf0b6l);
+            "message digest"
+            (Optint.of_unsigned_int32 0xdbf0b6l);
         ] );
     ]
