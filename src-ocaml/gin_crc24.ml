@@ -10,7 +10,8 @@ let crc24 :
   let crc = ref crc in
   for i = 0 to len - 1 do
     crc :=
-      Optint.logxor !crc (Optint.of_unsigned_int (Char.code (get buf (off + i)) lsl 16)) ;
+      Optint.logxor !crc
+        (Optint.of_unsigned_int (Char.code (get buf (off + i)) lsl 16)) ;
     for _ = 0 to 7 do
       crc := Optint.shift_left !crc 1 ;
       if Optint.logand !crc _1000000 <> Optint.zero

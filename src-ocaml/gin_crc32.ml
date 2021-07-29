@@ -274,7 +274,8 @@ let buf_fold_left get f acc buf offset length =
   !acc_r
 
 let update_crc acc c =
-  let index = Optint.(to_unsigned_int (logand acc ff)) lxor int_of_char c land 0xff in
+  let index =
+    Optint.(to_unsigned_int (logand acc ff)) lxor int_of_char c land 0xff in
   Optint.logand
     (Optint.logxor crc_table.(index) (Optint.shift_right_logical acc 8))
     ffffffff
