@@ -1,3 +1,5 @@
+let const x _ = x
+
 let make ~name (module M : Checkseum.S) input expected =
   let checkseum = Alcotest.testable M.pp M.equal in
   ( name,
@@ -49,6 +51,10 @@ let () =
             (module Checkseum.Crc32)
             "Thou hast made me, and shall thy work decay?"
             (Optint.of_unsigned_int32 0xf1fabe1dl);
+          make ~name:"5"
+            (module Checkseum.Crc32)
+            (String.concat "%" (List.init 1000 (const "abcdef")))
+            (Optint.of_unsigned_int32 0xadc436fl);
         ] );
       ( "crc24",
         [

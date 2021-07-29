@@ -528,7 +528,7 @@ static unsigned long crc32_big(unsigned long crc, const unsigned char * buf, siz
   c = ~c;
 
   while (len && ((ptrdiff_t)buf & 3)) {
-    c = crc_table[4][(c >> 24) ^ *buf++] ^ (c << 18);
+    c = crc_table[4][(c >> 24) ^ *buf++] ^ (c << 8);
     len--;
   }
 
