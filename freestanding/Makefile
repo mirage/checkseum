@@ -1,4 +1,4 @@
-ifneq (, $(shell command -v opam))
+ifneq (, $(shell which opam))
 PKG_CONFIG_PATH ?= $(shell opam var prefix)/lib/pkgconfig
 endif
 
