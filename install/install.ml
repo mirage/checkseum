@@ -17,10 +17,11 @@ let output_line oc line =
   output_string oc line ;
   output_char oc new_line
 
-let () = match Sys.getenv "ESY_CHECKSEUM" with
+let () =
+  match Sys.getenv "ESY_CHECKSEUM" with
   | _ -> () (* XXX(dinosaure): do nothing for `esy`. *)
   | exception Not_found ->
-    Unix.chmod meta 0o644 ;
-    let oc = open_out_gen [ Open_append ] 0o644 meta in
-    output_line oc freestanding ;
-    close_out oc
+      Unix.chmod meta 0o644 ;
+      let oc = open_out_gen [ Open_append ] 0o644 meta in
+      output_line oc freestanding ;
+      close_out oc
