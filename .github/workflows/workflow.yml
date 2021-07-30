@@ -20,9 +20,6 @@ jobs:
         run: |
           echo '{
                   "name": "esy-checkseum",
-                  "esy": {
-                    "exportedEnv": { "ESY_CHECKSEUM": { "val": "true", "scope": "global" } }
-                  },
                   "dependencies": {
                     "ocaml": "${{ matrix.ocaml-compiler }}",
                     "checkseum": "./checkseum.opam",
