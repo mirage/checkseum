@@ -1,3 +1,11 @@
+### v0.3.2 2021-02-08 Arles (France)
+
+- `freenstanding` support does not need `opam` (@sternenseemann, @dinosaure, #53)
+- Fix big-endian support (@dinosaure, #56)
+- Use `which` when `command -v` is not available (@dinosaure, @sternenseemann, @mseri, #56)
+- Fix `esy` support and on its environment the MirageOS 3 support (@dinosaure, @mseri, #56)
+- Upgrade to `ocamlformat.0.19.0` (@dinosaure, #57)
+
 ### v0.3.1 2021-23-02 Paris (France)
 
 - Upgrade `checkseum` to `optint.0.0.5` (@dinosaure, #51)
