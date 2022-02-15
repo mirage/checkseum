@@ -1,7 +1,9 @@
-(copy_files# ../src-c/native/*.c)
+(copy_files# ../src-c/native/*.{c,h})
 
 (rule
- (deps adler32.c crc24.c crc32.c crc32c.c stubs.c Makefile)
+ (deps
+  (glob_files *.{c,h})
+  Makefile)
  (targets libcheckseum_freestanding_stubs.a)
  (action
   (no-infer
