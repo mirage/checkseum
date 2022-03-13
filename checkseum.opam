@@ -18,13 +18,13 @@ top of optint to get the best representation of an int32. """
 
 build: [
   [ "dune" "build" "-p" name "-j" jobs ]
-  [ "./install/install.ml" ]
+  [ "%{ocaml:bin}%/ocaml" "./install/install.ml" ]
   [ "dune" "runtest" "-p" name "-j" jobs ] {with-test}
 ]
 
 install: [
   [ "dune" "install" "-p" name ] {with-test}
-  [ "./test/test_runes.ml" ] {with-test}
+  [ "%{ocaml:bin}%/ocaml" "./test/test_runes.ml" ] {with-test}
 ]
 
 depends: [
