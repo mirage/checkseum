@@ -3,7 +3,7 @@
 
 #if defined(_STDDEF_H)
 #  include <stddef.h>
-#elif defined(WIN32)
+#elif defined(_WIN32)
 #  include <CRTDEFS.H>
 #else
 typedef long ptrdiff_t;

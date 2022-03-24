@@ -1,3 +1,7 @@
+### Pending
+
+- use canonical `_WIN32` macro to detect Windows (@jonahbeckford, #61)
+
 ### v0.3.2 2021-02-08 Arles (France)
 
 - `freenstanding` support does not need `opam` (@sternenseemann, @dinosaure, #53)
