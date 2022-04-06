@@ -1,7 +1,5 @@
 let _1000000 = Optint.of_unsigned_int 0x1000000
-
 let _ffffff = Optint.of_unsigned_int 0xffffff
-
 let _crc24_poly = Optint.of_unsigned_int 0x1864cfb
 
 let crc24 :
@@ -23,26 +21,17 @@ let crc24 :
 type t = Optint.t
 
 type bigstring =
-  ( char,
-    Bigarray.int8_unsigned_elt,
-    Bigarray.c_layout )
-  Bigarray.Array1.t
+  (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
 
 let equal a b = Optint.equal a b
-
 let pp ppf v = Optint.pp ppf v
-
 let default = Optint.of_unsigned_int 0xb704ce
-
 let digest_bigstring a o l v = crc24 ~get:Bigarray.Array1.get a o l v
 
 let unsafe_digest_bigstring a o l v =
   crc24 ~get:Bigarray.Array1.unsafe_get a o l v
 
 let digest_string a o l v = crc24 ~get:String.get a o l v
-
 let unsafe_digest_string a o l v = crc24 ~get:String.unsafe_get a o l v
-
 let digest_bytes a o l v = crc24 ~get:Bytes.get a o l v
-
 let unsafe_digest_bytes a o l v = crc24 ~get:Bytes.unsafe_get a o l v

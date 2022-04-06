@@ -2,7 +2,6 @@
 (* Copyright (c) 2016, Gabriel de Perthuis - MIT licensed *)
 
 let ffffffff = Optint.of_unsigned_int32 (-1l)
-
 let ff = Optint.of_unsigned_int 0xff
 
 let crc_table =
@@ -290,26 +289,17 @@ let crc32c :
 type t = Optint.t
 
 type bigstring =
-  ( char,
-    Bigarray.int8_unsigned_elt,
-    Bigarray.c_layout )
-  Bigarray.Array1.t
+  (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
 
 let equal a b = Optint.equal a b
-
 let pp ppf v = Optint.pp ppf v
-
 let default = Optint.zero
-
 let digest_bigstring a o l v = crc32c ~get:Bigarray.Array1.get a o l v
 
 let unsafe_digest_bigstring a o l v =
   crc32c ~get:Bigarray.Array1.unsafe_get a o l v
 
 let digest_string a o l v = crc32c ~get:String.get a o l v
-
 let unsafe_digest_string a o l v = crc32c ~get:String.unsafe_get a o l v
-
 let digest_bytes a o l v = crc32c ~get:Bytes.get a o l v
-
 let unsafe_digest_bytes a o l v = crc32c ~get:Bytes.unsafe_get a o l v

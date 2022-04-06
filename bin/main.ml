@@ -4,15 +4,11 @@ let invalid_bounds off len =
   invalid_arg "Invalid bounds (off: %d, len: %d)" off len
 
 let strf = Format.asprintf
-
 let io_buffer_size = 65536
 
 type adler32 = Checkseum.Adler32.t
-
 type crc32c = Checkseum.Crc32c.t
-
 type crc32 = Checkseum.Crc32.t
-
 type crc24 = Checkseum.Crc24.t
 
 type 'kind kind =
@@ -23,19 +19,14 @@ type 'kind kind =
 
 module Checksum : sig
   type src = [ `Channel of in_channel | `Manual | `String of string ]
-
   type 'value ret = [ `Await | `End of 'value ]
-
   type 'value t
 
   val src : 'value t -> string -> int -> int -> unit
-
   val encoder : 'value kind -> default:'value -> src -> 'value t
-
   val encode : 'value t -> 'value ret
 end = struct
   type src = [ `Channel of in_channel | `Manual | `String of string ]
-
   type 'value ret = [ `Await | `End of 'value ]
 
   type 'value t = {
@@ -121,7 +112,6 @@ end = struct
 end
 
 let ( >>= ) x f = match x with Ok x -> f x | Error err -> Error err
-
 let error_msgf fmt = Format.kasprintf (fun err -> Error (`Msg err)) fmt
 
 type v = Kind : 'kind kind * 'kind -> v

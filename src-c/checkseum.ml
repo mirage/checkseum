@@ -1,15 +1,9 @@
 type ba =
-  ( char,
-    Bigarray.int8_unsigned_elt,
-    Bigarray.c_layout )
-  Bigarray.Array1.t
+  (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
 
 type st = Bytes.t
-
 type off = int
-
 type len = int
-
 type optint = Optint.t
 
 (* XXX(dinosaure): we should be able to annot external with [@@noalloc] but
@@ -17,7 +11,6 @@ type optint = Optint.t
 
 module type FOREIGN = sig
   val unsafe_bytes : optint -> st -> off -> len -> optint
-
   val unsafe_bigstring : optint -> ba -> off -> len -> optint
 end
 
@@ -61,11 +54,8 @@ module Make (F : FOREIGN) (D : DESC) = struct
   type t = optint
 
   let pp ppf v = Optint.pp ppf v
-
   let equal a b = Optint.equal a b
-
   let default = D.default
-
   let unsafe_digest_bytes a o l v = F.unsafe_bytes v a o l
 
   let unsafe_digest_string a o l v =
@@ -95,21 +85,13 @@ module type S = sig
   type t = optint
 
   val pp : Format.formatter -> t -> unit
-
   val equal : t -> t -> bool
-
   val default : t
-
   val digest_bytes : Bytes.t -> int -> int -> t -> t
-
   val unsafe_digest_bytes : Bytes.t -> int -> int -> t -> t
-
   val digest_string : String.t -> int -> int -> t -> t
-
   val unsafe_digest_string : String.t -> int -> int -> t -> t
-
   val digest_bigstring : bigstring -> int -> int -> t -> t
-
   val unsafe_digest_bigstring : bigstring -> int -> int -> t -> t
 end
 
