@@ -1,8 +1,5 @@
 type bigstring =
-  ( char,
-    Bigarray_compat.int8_unsigned_elt,
-    Bigarray_compat.c_layout )
-  Bigarray_compat.Array1.t
+  (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t
 
 module type S = sig
   type t = Optint.t

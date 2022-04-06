@@ -1,7 +1,7 @@
 (library
  (name checkseum)
  (public_name checkseum)
- (libraries bigarray-compat optint)
+ (libraries optint)
  (virtual_modules checkseum)
  (default_implementation checkseum.c)
  (wrapped false))

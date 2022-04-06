@@ -38,7 +38,6 @@ let digest_tcpip inputs v =
   Staged.stage (fun () -> Tcpip_checksum.ones_complement v)
 
 let inputs = List.init 5 (fun i -> (i, Cstruct.of_string (random_string 256)))
-
 let args, inputs = List.split inputs
 
 let test_adler32 =
