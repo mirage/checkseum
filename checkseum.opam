@@ -33,8 +33,6 @@ depends: [
   "conf-pkg-config" {build}
   "dune-configurator"
   "optint"        {>= "0.0.5"}
-  "base-bytes"
-  "bigarray-compat"
   "alcotest"      {with-test}
   "bos"           {with-test}
   "astring"       {with-test}

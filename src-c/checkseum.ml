@@ -1,8 +1,8 @@
 type ba =
   ( char,
-    Bigarray_compat.int8_unsigned_elt,
-    Bigarray_compat.c_layout )
-  Bigarray_compat.Array1.t
+    Bigarray.int8_unsigned_elt,
+    Bigarray.c_layout )
+  Bigarray.Array1.t
 
 type st = Bytes.t
 
@@ -84,7 +84,7 @@ module Make (F : FOREIGN) (D : DESC) = struct
     unsafe_digest_string a o l v
 
   let digest_bigstring a o l v =
-    if o < 0 || l < 0 || o > Bigarray_compat.Array1.dim a - l
+    if o < 0 || l < 0 || o > Bigarray.Array1.dim a - l
     then invalid_arg "index out of bounds" ;
     unsafe_digest_bigstring a o l v
 end

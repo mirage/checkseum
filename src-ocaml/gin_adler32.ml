@@ -135,11 +135,11 @@ let digest_string a o l v = digest ~get:String.get a o l v
 
 type bigstring =
   ( char,
-    Bigarray_compat.int8_unsigned_elt,
-    Bigarray_compat.c_layout )
-  Bigarray_compat.Array1.t
+    Bigarray.int8_unsigned_elt,
+    Bigarray.c_layout )
+  Bigarray.Array1.t
 
 let unsafe_digest_bigstring a o l v =
-  digest ~get:Bigarray_compat.Array1.unsafe_get a o l v
+  digest ~get:Bigarray.Array1.unsafe_get a o l v
 
-let digest_bigstring a o l v = digest ~get:Bigarray_compat.Array1.get a o l v
+let digest_bigstring a o l v = digest ~get:Bigarray.Array1.get a o l v
