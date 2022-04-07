@@ -555,7 +555,7 @@ static unsigned long crc32_big(unsigned long crc, const unsigned char * buf, siz
   return (unsigned long) (SWAP32(c));
 }
 
-#endif
+#endif /* BYFOUR */
 
 #define DO1 crc = crc_table[0][((int)crc ^ (*buf++)) & 0xff] ^ (crc >> 8)
 #define DO8 DO1; DO1; DO1; DO1; DO1; DO1; DO1; DO1

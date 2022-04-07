@@ -7,7 +7,7 @@
   (names stubs adler32 crc32c crc32 crc24)
   (flags
    (:include stddef.sexp)
-   (:standard -I./native/)))
+   (:standard -O3 -I./native/)))
  (implements checkseum))
 
 (include_subdirs unqualified)
