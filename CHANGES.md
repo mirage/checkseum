@@ -1,6 +1,16 @@
-### Pending
+### v0.3.3 2022-04-08 Paris (France)
 
-- use canonical `_WIN32` macro to detect Windows (@jonahbeckford, #61)
+- Use canonical `_WIN32` macro to detect Windows (@jonahbeckford, #61)
+- Fix Windows support with cygpath (@MisterDA, #60)
+- Use `ocaml` variable to execute `install.ml` instead of a shebang with `env`
+  (@vapourismo, @dinosaure, #62)
+- Upgrade to `ocamlformat.0.21.0` (@hannesm, #63)
+- Remove `bigarray-compat` package (@hannesm, #63)
+- Support only OCaml >= 4.07 (@hannesm, #63)
+- Optimize `checkseum.c` and use the advantage of `[@untagged]` and `[@unboxed]`
+  `checkseum` requires `optint.0.2.0` now (@dinosaure, #64)
+- Update the `README.md` (@dinosaure, #65)
+- Use `caml_copy_int32` instead of `copy_int32` (@dinosaure, #66)
 
 ### v0.3.2 2021-02-08 Arles (France)
 
