@@ -20,24 +20,24 @@ let random_string len =
 
 let digest_adler32 inputs i =
   let v = Cstruct.to_bigarray inputs.(i) in
-  let len = Cstruct.len inputs.(i) in
+  let len = Cstruct.length inputs.(i) in
   Staged.stage (fun () -> Checkseum.Adler32.(digest_bigstring v 0 len default))
 
 let digest_crc32 inputs i =
   let v = Cstruct.to_bigarray inputs.(i) in
-  let len = Cstruct.len inputs.(i) in
+  let len = Cstruct.length inputs.(i) in
   Staged.stage (fun () -> Checkseum.Crc32.(digest_bigstring v 0 len default))
 
 let digest_crc32c inputs i =
   let v = Cstruct.to_bigarray inputs.(i) in
-  let len = Cstruct.len inputs.(i) in
+  let len = Cstruct.length inputs.(i) in
   Staged.stage (fun () -> Checkseum.Crc32c.(digest_bigstring v 0 len default))
 
 let digest_tcpip inputs v =
   let v = inputs.(v) in
   Staged.stage (fun () -> Tcpip_checksum.ones_complement v)
 
-let inputs = List.init 5 (fun i -> (i, Cstruct.of_string (random_string 256)))
+let inputs = List.init 5 (fun i -> (i, Cstruct.of_string (random_string 4096)))
 let args, inputs = List.split inputs
 
 let test_adler32 =
@@ -65,8 +65,9 @@ let benchmark () =
     Analyze.ols ~bootstrap:0 ~r_square:true ~predictors:Measure.[| run |] in
   let instances =
     Instance.[ minor_allocated; major_allocated; monotonic_clock ] in
-  let raw_results =
-    Benchmark.all ~run:3000 ~quota:Benchmark.(s 1.) instances test in
+  let cfg =
+    Benchmark.cfg ~limit:3000 ~quota:Time.(second 1.) ~kde:(Some 1000) () in
+  let raw_results = Benchmark.all cfg instances test in
   let results =
     List.map (fun instance -> Analyze.all ols instance raw_results) instances
   in

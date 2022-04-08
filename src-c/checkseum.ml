@@ -6,48 +6,203 @@ type off = int
 type len = int
 type optint = Optint.t
 
-(* XXX(dinosaure): we should be able to annot external with [@@noalloc] but
-   it's depending on architecture and structural value of [Optint.t]. TODO! *)
-
 module type FOREIGN = sig
-  val unsafe_bytes : optint -> st -> off -> len -> optint
-  val unsafe_bigstring : optint -> ba -> off -> len -> optint
+  type t
+
+  val unsafe_bytes : t -> st -> off -> len -> t
+  val unsafe_bigstring : t -> ba -> off -> len -> t
 end
 
 module type DESC = sig
   val default : optint
 end
 
-module Adler32_foreign : FOREIGN = struct
-  external unsafe_bytes : optint -> st -> off -> len -> optint
-    = "caml_checkseum_adler32_st"
+module Adler32_foreign_64 = struct
+  type t = int
 
-  external unsafe_bigstring : optint -> ba -> off -> len -> optint
-    = "caml_checkseum_adler32_ba"
+  external unsafe_bytes :
+    (t[@untagged]) ->
+    st ->
+    (off[@untagged]) ->
+    (len[@untagged]) ->
+    (t[@untagged])
+    = "caml_checkseum_adler32_st" "caml_checkseum_adler32_st_untagged"
+    [@@noalloc]
+
+  external unsafe_bigstring :
+    (t[@untagged]) ->
+    ba ->
+    (off[@untagged]) ->
+    (len[@untagged]) ->
+    (t[@untagged])
+    = "caml_checkseum_adler32_ba" "caml_checkseum_adler32_ba_untagged"
+    [@@noalloc]
 end
 
-module Crc32_foreign : FOREIGN = struct
-  external unsafe_bytes : optint -> st -> off -> len -> optint
-    = "caml_checkseum_crc32_st"
+module Adler32_foreign_32 = struct
+  type t = int32
 
-  external unsafe_bigstring : optint -> ba -> off -> len -> optint
-    = "caml_checkseum_crc32_ba"
+  external unsafe_bytes :
+    (t[@unboxed]) -> st -> (off[@untagged]) -> (len[@untagged]) -> (t[@unboxed])
+    = "caml_checkseum_adler32_st" "caml_checkseum_adler32_st_untagged"
+    [@@noalloc]
+
+  external unsafe_bigstring :
+    (t[@unboxed]) -> ba -> (off[@untagged]) -> (len[@untagged]) -> (t[@unboxed])
+    = "caml_checkseum_adler32_ba" "caml_checkseum_adler32_ba_untagged"
+    [@@noalloc]
 end
 
-module Crc32c_foreign : FOREIGN = struct
-  external unsafe_bytes : optint -> st -> off -> len -> optint
-    = "caml_checkseum_crc32c_st"
+module Adler32_foreign : FOREIGN with type t = optint = struct
+  let impl : (module FOREIGN with type t = Optint.t) =
+    match Optint.is_immediate with
+    | Optint.Conditional.True ->
+        (module Adler32_foreign_64 : FOREIGN with type t = Optint.t)
+    | Optint.Conditional.False ->
+        (module Adler32_foreign_32 : FOREIGN with type t = Optint.t)
 
-  external unsafe_bigstring : optint -> ba -> off -> len -> optint
-    = "caml_checkseum_crc32c_ba"
+  include (val impl : FOREIGN with type t = Optint.t)
 end
 
-module Crc24_foreign : FOREIGN = struct
-  external unsafe_bytes : optint -> st -> off -> len -> optint
-    = "caml_checkseum_crc24_st"
+module Crc32_foreign_64 = struct
+  type t = int
 
-  external unsafe_bigstring : optint -> ba -> off -> len -> optint
-    = "caml_checkseum_crc24_ba"
+  external unsafe_bytes :
+    (t[@untagged]) ->
+    st ->
+    (off[@untagged]) ->
+    (len[@untagged]) ->
+    (t[@untagged])
+    = "caml_checkseum_crc32_st" "caml_checkseum_crc32_st_untagged"
+    [@@noalloc]
+
+  external unsafe_bigstring :
+    (t[@untagged]) ->
+    ba ->
+    (off[@untagged]) ->
+    (len[@untagged]) ->
+    (t[@untagged])
+    = "caml_checkseum_crc32_ba" "caml_checkseum_crc32_ba_untagged"
+    [@@noalloc]
+end
+
+module Crc32_foreign_32 = struct
+  type t = int32
+
+  external unsafe_bytes :
+    (t[@unboxed]) -> st -> (off[@untagged]) -> (len[@untagged]) -> (t[@unboxed])
+    = "caml_checkseum_crc32_st" "caml_checkseum_crc32_st_untagged"
+    [@@noalloc]
+
+  external unsafe_bigstring :
+    (t[@unboxed]) -> ba -> (off[@untagged]) -> (len[@untagged]) -> (t[@unboxed])
+    = "caml_checkseum_crc32_ba" "caml_checkseum_crc32_ba_untagged"
+    [@@noalloc]
+end
+
+module Crc32_foreign : FOREIGN with type t = optint = struct
+  let impl : (module FOREIGN with type t = Optint.t) =
+    match Optint.is_immediate with
+    | Optint.Conditional.True ->
+        (module Crc32_foreign_64 : FOREIGN with type t = Optint.t)
+    | Optint.Conditional.False ->
+        (module Crc32_foreign_32 : FOREIGN with type t = Optint.t)
+
+  include (val impl : FOREIGN with type t = Optint.t)
+end
+
+module Crc32c_foreign_64 = struct
+  type t = int
+
+  external unsafe_bytes :
+    (t[@untagged]) ->
+    st ->
+    (off[@untagged]) ->
+    (len[@untagged]) ->
+    (t[@untagged])
+    = "caml_checkseum_crc32c_st" "caml_checkseum_crc32c_st_untagged"
+    [@@noalloc]
+
+  external unsafe_bigstring :
+    (t[@untagged]) ->
+    ba ->
+    (off[@untagged]) ->
+    (len[@untagged]) ->
+    (t[@untagged])
+    = "caml_checkseum_crc32c_ba" "caml_checkseum_crc32c_ba_untagged"
+    [@@noalloc]
+end
+
+module Crc32c_foreign_32 = struct
+  type t = int32
+
+  external unsafe_bytes :
+    (t[@unboxed]) -> st -> (off[@untagged]) -> (len[@untagged]) -> (t[@unboxed])
+    = "caml_checkseum_crc32c_st" "caml_checkseum_crc32c_st_untagged"
+    [@@noalloc]
+
+  external unsafe_bigstring :
+    (t[@unboxed]) -> ba -> (off[@untagged]) -> (len[@untagged]) -> (t[@unboxed])
+    = "caml_checkseum_crc32c_ba" "caml_checkseum_crc32c_ba_untagged"
+    [@@noalloc]
+end
+
+module Crc32c_foreign : FOREIGN with type t = optint = struct
+  let impl : (module FOREIGN with type t = Optint.t) =
+    match Optint.is_immediate with
+    | Optint.Conditional.True ->
+        (module Crc32c_foreign_64 : FOREIGN with type t = Optint.t)
+    | Optint.Conditional.False ->
+        (module Crc32c_foreign_32 : FOREIGN with type t = Optint.t)
+
+  include (val impl : FOREIGN with type t = Optint.t)
+end
+
+module Crc24_foreign_64 = struct
+  type t = int
+
+  external unsafe_bytes :
+    (t[@untagged]) ->
+    st ->
+    (off[@untagged]) ->
+    (len[@untagged]) ->
+    (t[@untagged])
+    = "caml_checkseum_crc24_st" "caml_checkseum_crc24_st_untagged"
+    [@@noalloc]
+
+  external unsafe_bigstring :
+    (t[@untagged]) ->
+    ba ->
+    (off[@untagged]) ->
+    (len[@untagged]) ->
+    (t[@untagged])
+    = "caml_checkseum_crc24_ba" "caml_checkseum_crc24_ba_untagged"
+    [@@noalloc]
+end
+
+module Crc24_foreign_32 = struct
+  type t = int32
+
+  external unsafe_bytes :
+    (t[@unboxed]) -> st -> (off[@untagged]) -> (len[@untagged]) -> (t[@unboxed])
+    = "caml_checkseum_crc24_st" "caml_checkseum_crc24_st_untagged"
+    [@@noalloc]
+
+  external unsafe_bigstring :
+    (t[@unboxed]) -> ba -> (off[@untagged]) -> (len[@untagged]) -> (t[@unboxed])
+    = "caml_checkseum_crc24_ba" "caml_checkseum_crc24_ba_untagged"
+    [@@noalloc]
+end
+
+module Crc24_foreign : FOREIGN with type t = optint = struct
+  let impl : (module FOREIGN with type t = Optint.t) =
+    match Optint.is_immediate with
+    | Optint.Conditional.True ->
+        (module Crc24_foreign_64 : FOREIGN with type t = Optint.t)
+    | Optint.Conditional.False ->
+        (module Crc24_foreign_32 : FOREIGN with type t = Optint.t)
+
+  include (val impl : FOREIGN with type t = Optint.t)
 end
 
 module Make (F : FOREIGN) (D : DESC) = struct

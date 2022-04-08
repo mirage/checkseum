@@ -50,3 +50,6 @@ conflicts: [
   "mirage-xen" {< "6.0.0"}
   "ocaml-freestanding" {< "0.4.3"}
 ]
+pin-depends: [
+  [ "optint.dev" "git+https://github.com/mirage/optint.git#28b2bd6fc0bfff16f76161cca8a206620f768a86" ]
+]
