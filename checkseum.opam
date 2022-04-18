@@ -32,7 +32,7 @@ depends: [
   "dune"          {>= "2.6.0"}
   "conf-pkg-config" {build}
   "dune-configurator"
-  "optint"        {>= "0.0.5"}
+  "optint"        {>= "0.2.0"}
   "alcotest"      {with-test}
   "bos"           {with-test}
   "astring"       {with-test}
@@ -49,7 +49,4 @@ depopts: [
 conflicts: [
   "mirage-xen" {< "6.0.0"}
   "ocaml-freestanding" {< "0.4.3"}
-]
-pin-depends: [
-  [ "optint.dev" "git+https://github.com/mirage/optint.git#28b2bd6fc0bfff16f76161cca8a206620f768a86" ]
 ]
