@@ -28,10 +28,9 @@
 #include <stdint.h>
 
 typedef unsigned long uLong;
-typedef unsigned int  uInt;
 typedef unsigned char Byte;
 typedef Byte FAR Bytef;
 
-uLong checkseum_adler32_digest(uLong adler, const Bytef *buf, uInt len);
+uLong checkseum_adler32_digest(uLong adler, const Bytef *buf, size_t len);
 
 #endif

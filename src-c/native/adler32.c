@@ -100,7 +100,7 @@ uLong _adler32(adler, buf, len)
 uLong checkseum_adler32_digest(adler, buf, len)
      uLong adler;
      const Bytef *buf;
-     uInt len;
+     size_t len;
 {
   return (_adler32(adler, buf, len));
 }
