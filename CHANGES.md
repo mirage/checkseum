@@ -1,3 +1,8 @@
+### v0.3.4 2022-06-07 Arles (France)
+
+- Add the support of Esperanto (@dinosaure, #69)
+- Do not rely on the OCaml package to execute the `install.ml` script (@vapourismo, #67)
+
 ### v0.3.3 2022-04-08 Paris (France)
 
 - Use canonical `_WIN32` macro to detect Windows (@jonahbeckford, #61)
