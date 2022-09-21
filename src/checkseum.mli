@@ -30,7 +30,7 @@ module type S = sig
       without bound-checking. *)
 
   val digest_bigstring : bigstring -> int -> int -> t -> t
-  (** Same as {!digest_bigstring} but for {!bigstring}. *)
+  (** Same as {!digest_bytes} but for {!bigstring}. *)
 
   val unsafe_digest_bigstring : bigstring -> int -> int -> t -> t
   (** [unsafe_digest_bigstring msg off len t] is the same as {!digest_bigstring}
