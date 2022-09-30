@@ -303,3 +303,5 @@ let digest_string a o l v = crc32 ~get:String.get a o l v
 let unsafe_digest_string a o l v = crc32 ~get:String.unsafe_get a o l v
 let digest_bytes a o l v = crc32 ~get:Bytes.get a o l v
 let unsafe_digest_bytes a o l v = crc32 ~get:Bytes.unsafe_get a o l v
+let to_int32 = Optint.to_unsigned_int32
+let of_int32 = Optint.of_unsigned_int32

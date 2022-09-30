@@ -212,6 +212,8 @@ module Make (F : FOREIGN) (D : DESC) = struct
   let equal a b = Optint.equal a b
   let default = D.default
   let unsafe_digest_bytes a o l v = F.unsafe_bytes v a o l
+  let to_int32 = Optint.to_unsigned_int32
+  let of_int32 = Optint.of_unsigned_int32
 
   let unsafe_digest_string a o l v =
     F.unsafe_bytes v (Bytes.unsafe_of_string a) o l
@@ -248,6 +250,8 @@ module type S = sig
   val unsafe_digest_string : String.t -> int -> int -> t -> t
   val digest_bigstring : bigstring -> int -> int -> t -> t
   val unsafe_digest_bigstring : bigstring -> int -> int -> t -> t
+  val to_int32 : t -> int32
+  val of_int32 : int32 -> t
 end
 
 module Adler32 : S =
