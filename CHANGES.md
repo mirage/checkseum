@@ -1,3 +1,9 @@
+### v0.4.0 2022-09-30 Paris (France)
+
+- Support LLVM/clang with `__STDDEF_H` (@jonahbeckford, #71)
+- Fix docstring reference (@reynir, #72)
+- Add `{of,to}_int32` (@reynir, #73, @dinosaure, #74)
+
 ### v0.3.4 2022-06-07 Arles (France)
 
 - Add the support of Esperanto (@dinosaure, #69)
