@@ -13,6 +13,8 @@ module type S = sig
   val unsafe_digest_string : String.t -> int -> int -> t -> t
   val digest_bigstring : bigstring -> int -> int -> t -> t
   val unsafe_digest_bigstring : bigstring -> int -> int -> t -> t
+  val to_int32 : t -> int32
+  val of_int32 : int32 -> t
 end
 
 module Adler32 : S = Gin_adler32

@@ -133,3 +133,5 @@ let unsafe_digest_bigstring a o l v =
   digest ~get:Bigarray.Array1.unsafe_get a o l v
 
 let digest_bigstring a o l v = digest ~get:Bigarray.Array1.get a o l v
+let to_int32 = Optint.to_unsigned_int32
+let of_int32 = Optint.of_unsigned_int32
