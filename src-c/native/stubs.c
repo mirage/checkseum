@@ -23,7 +23,8 @@
                                                                                                     \
         CAMLprim value                                                                              \
         caml_checkseum_ ## name ## _st(value t, value src, intnat off, intnat len) {                \
-          intnat res = checkseum_ ## name ## _digest (Int_val (t), _st_uint8_off (src, off), len) ; \
+          intnat res = checkseum_ ## name ## _digest (Int_val (t), _st_uint8_off (src, off),        \
+			  Long_val (len)) ;                                                         \
 	  return (Val_int (res));                                                                   \
         }                                                                                           \
                                                                                                     \
@@ -44,7 +45,8 @@ __define_checkseum (crc24)
 #define __define_checkseum(name)                                                                        \
 	CAMLprim value                                                                                  \
         caml_checkseum_ ## name ## _ba(value t, value src, value off, value len) {                      \
-	  uint32_t res = checkseum_ ## name ## _digest (Int32_val (t), _ba_uint8_off (src, off), len) ; \
+	  uint32_t res = checkseum_ ## name ## _digest (Int32_val (t), _ba_uint8_off (src, off),        \
+			  Long_val (len)) ;                                                             \
 	  return (caml_copy_int32 (res));                                                               \
 	}                                                                                               \
 	                                                                                        	\
@@ -56,7 +58,8 @@ __define_checkseum (crc24)
                                                                                                         \
         CAMLprim value                                                                                  \
         caml_checkseum_ ## name ## _st(value t, value src, value off, value len) {                      \
-	  uint32_t res = checkseum_ ## name ## _digest (Int32_val (t), _st_uint8_off (src, off), len) ; \
+	  uint32_t res = checkseum_ ## name ## _digest (Int32_val (t), _st_uint8_off (src, off),        \
+			  Long_val (len)) ;                                                             \
 	  return (caml_copy_int32 (res));                                                               \
         }                                                                                               \
 	                                                                                                \
