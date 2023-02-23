@@ -1,3 +1,9 @@
+### v0.5.0 2023-02-23 Paris (France)
+
+- Fixup deprecations from `optint.0.3.0` (@tmcgilchrist, #76)
+- Fix C stubs on 32-bits machines (@dinosaure, #76)
+- Delete the old linking trick about MirageOS 3 (@dinosaure, #77)
+
 ### v0.4.0 2022-09-30 Paris (France)
 
 - Support LLVM/clang with `__STDDEF_H` (@jonahbeckford, #71)
