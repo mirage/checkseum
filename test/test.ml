@@ -12,6 +12,23 @@ let make ~name (module M : Checkseum.S) input expected =
 let () =
   Alcotest.run "checkseum"
     [
+      ( "adler32",
+        [
+          make ~name:"0" (module Checkseum.Adler32) "" 1l;
+          make ~name:"1" (module Checkseum.Adler32) "\x00" 65537l;
+          make ~name:"2"
+            (module Checkseum.Adler32)
+            "\xff\xff\xff\xff" 167379965l;
+          make ~name:"3" (module Checkseum.Adler32) "123456789" 0x91E01DEl;
+          make ~name:"4"
+            (module Checkseum.Adler32)
+            (String.concat ""
+               [
+                 "\x9d\x02\x9d\x02\x90\xad\x14\x72\xb9\xb4\x44\x59\x5d\x21\x05\xb7";
+                 "\x34\x4f\x64\xe9\xa8\x5a\x3e\xd9\x91\x1f\x44\x91\xc1\x5c";
+               ])
+            0xBDE50CD1l;
+        ] );
       ( "crc32c",
         [
           make ~name:"0" (module Checkseum.Crc32c) "" 0l;
