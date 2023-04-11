@@ -1,3 +1,11 @@
+### v0.5.1 2023-04-11 Paris (France)
+
+- Fix regression on `adler32` (the OCaml version) introduced by #76 and spotted
+  by @balat (@dinosaure, #80). We advise the user to upgrade as soon as he/she
+  can `checkseum`. `checkseum.0.5.0` will be disabled with this release.
+- Fix the CI on Windows (@dinosaure, @MisterDA, #79)
+  See (mirage/bechamel#41 for more details)
+
 ### v0.5.0 2023-02-23 Paris (France)
 
 - Fixup deprecations from `optint.0.3.0` (@tmcgilchrist, #76)
