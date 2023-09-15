@@ -11,10 +11,10 @@ let digest : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
   let a =
     ref
       Optint.(
-        to_unsigned_int Infix.((adler32 lsr 16) land of_unsigned_int 0xFFFF))
+        to_unsigned_int Infix.((adler32 lsr 16) land of_int 0xFFFF))
   in
   let b =
-    ref Optint.(to_unsigned_int Infix.(adler32 land of_unsigned_int 0xFFFF))
+    ref Optint.(to_unsigned_int Infix.(adler32 land of_int 0xFFFF))
   in
   let l = ref len in
   let o = ref off in
