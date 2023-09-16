@@ -6,8 +6,11 @@
  (copy# ../test.ml test.ml))
 
 (rule
+ (copy# ../bib bib))
+
+(rule
  (alias runtest)
  (deps
-  (:test test.exe))
+  (:test test.exe) bib)
  (action
   (run %{test} --color=always)))
