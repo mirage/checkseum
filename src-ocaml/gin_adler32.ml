@@ -17,57 +17,57 @@ let digest : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
   then adler32
   else if len = 1
   then (
-    b := !b + (Optint.of_int (Char.code (get buf !o))) ;
+    b := !b + Optint.of_int (Char.code (get buf !o)) ;
     if !b >= _base then b := !b - _base ;
     a := !a + !b ;
     if !a >= _base then a := !a - _base ;
-      !b lor (!a lsl 16))
+    !b lor (!a lsl 16))
   else if len < 16
   then (
     while !l <> 0 do
-      b := !b + (Optint.of_int (Char.code (get buf !o))) ;
+      b := !b + Optint.of_int (Char.code (get buf !o)) ;
       a := !a + !b ;
       incr o ;
       decr l
     done ;
     if !b >= _base then b := !b - _base ;
     a := Optint.rem !a _base ;
-      !b lor (!a lsl 16))
+    !b lor (!a lsl 16))
   else (
     while !l >= _nmax do
-      l := Stdlib.(!l - _nmax) ;
+      (l := Stdlib.(!l - _nmax)) ;
       for _ = Stdlib.(_nmax / 16) downto 1 do
-        b := !b + (Optint.of_int (Char.code (get buf !o))) ;
+        b := !b + Optint.of_int (Char.code (get buf !o)) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 1)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 1))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 2)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 2))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 3)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 3))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 4)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 4))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 5)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 5))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 6)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 6))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 7)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 7))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 8)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 8))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 9)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 9))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 10)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 10))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 11)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 11))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 12)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 12))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 13)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 13))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 14)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 14))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 15)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 15))) ;
         a := !a + !b ;
         o := Stdlib.(!o + 16)
       done ;
@@ -77,50 +77,50 @@ let digest : type a. get:(a -> int -> char) -> a -> int -> int -> t -> t =
     if !l > 0
     then (
       while !l >= 16 do
-        l := Stdlib.(!l - 16) ;
-        b := !b + (Optint.of_int (Char.code (get buf !o))) ;
+        (l := Stdlib.(!l - 16)) ;
+        b := !b + Optint.of_int (Char.code (get buf !o)) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 1)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 1))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 2)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 2))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 3)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 3))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 4)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 4))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 5)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 5))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 6)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 6))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 7)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 7))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 8)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 8))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 9)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 9))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 10)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 10))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 11)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 11))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 12)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 12))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 13)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 13))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 14)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 14))) ;
         a := !a + !b ;
-        b := !b + (Optint.of_int (Char.code (get buf Stdlib.(!o + 15)))) ;
+        b := !b + Optint.of_int (Char.code (get buf Stdlib.(!o + 15))) ;
         a := !a + !b ;
         o := Stdlib.(!o + 16)
       done ;
       while !l > 0 do
-        b := !b + (Optint.of_int (Char.code (get buf !o))) ;
+        b := !b + Optint.of_int (Char.code (get buf !o)) ;
         a := !a + !b ;
         decr l ;
         incr o
       done ;
       b := Optint.rem !b _base ;
       a := Optint.rem !a _base) ;
-      !b lor (!a lsl 16))
+    !b lor (!a lsl 16))
 
 let unsafe_digest_bytes a o l v = digest ~get:Bytes.unsafe_get a o l v
 let digest_bytes a o l v = digest ~get:Bytes.get a o l v

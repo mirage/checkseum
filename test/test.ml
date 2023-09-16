@@ -1,9 +1,10 @@
 let const x _ = x
 
-let rec unroll
-  : (module Checkseum.S) -> Optint.t -> string -> int -> int -> Optint.t
-  = fun (module M) crc str off len ->
-  if len = 0 then crc
+let rec unroll :
+    (module Checkseum.S) -> Optint.t -> string -> int -> int -> Optint.t =
+ fun (module M) crc str off len ->
+  if len = 0
+  then crc
   else
     let len' = min len 1 in
     let crc = M.(digest_string str off len' crc) in
@@ -15,15 +16,14 @@ let make ~name (module M : Checkseum.S) input expected =
     `Quick,
     fun () ->
       let crc = unroll (module M) M.default input 0 (String.length input) in
-      Alcotest.check checkseum name crc
-        M.(of_int32 expected) )
+      Alcotest.check checkseum name crc M.(of_int32 expected) )
 
 let bib =
   let ic = open_in "bib" in
   let ln = in_channel_length ic in
   let rs = Bytes.create ln in
-  really_input ic rs 0 ln;
-  close_in ic;
+  really_input ic rs 0 ln ;
+  close_in ic ;
   Bytes.unsafe_to_string rs
 
 let () =
@@ -45,7 +45,7 @@ let () =
                  "\x34\x4f\x64\xe9\xa8\x5a\x3e\xd9\x91\x1f\x44\x91\xc1\x5c";
                ])
             0xBDE50CD1l;
-          make ~name:"5" (module Checkseum.Adler32) bib 0xDE83A296l
+          make ~name:"5" (module Checkseum.Adler32) bib 0xDE83A296l;
         ] );
       ( "crc32c",
         [

@@ -11,6 +11,7 @@
 (rule
  (alias runtest)
  (deps
-  (:test test.exe) bib)
+  (:test test.exe)
+  bib)
  (action
   (run %{test} --color=always)))
