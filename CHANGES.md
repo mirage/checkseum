@@ -1,3 +1,7 @@
+### v0.5.2 2023-09-18 Paris (France)
+
+- Fix `adler32` for OCaml implementation (integer overflow) (@dinosaure, #83)
+
 ### v0.5.1 2023-04-11 Paris (France)
 
 - Fix regression on `adler32` (the OCaml version) introduced by #76 and spotted
