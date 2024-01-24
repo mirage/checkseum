@@ -25,11 +25,7 @@
 #define MOD63(a) a %= BASE
 
 static
-uLong _adler32(adler, buf, len)
-     uLong adler;
-     const Bytef *buf;
-     size_t len;
-     /* K&R style. */
+uLong _adler32(uLong adler, const Bytef *buf, size_t len)
 {
   unsigned long sum2;
   unsigned n;
@@ -97,10 +93,7 @@ uLong _adler32(adler, buf, len)
   return (adler | (sum2 << 16));
 }
 
-uLong checkseum_adler32_digest(adler, buf, len)
-     uLong adler;
-     const Bytef *buf;
-     size_t len;
+uLong checkseum_adler32_digest(uLong adler, const Bytef *buf, size_t len)
 {
   return (_adler32(adler, buf, len));
 }
