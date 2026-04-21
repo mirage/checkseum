@@ -1,3 +1,8 @@
+### v0.5.3 2026-04-19 Paris (France)
+
+- Fix compilation of checkseum with clang 16.0.6 (@hannesm, #85)
+- Add x-maintenance-intent (@hannesm, #86)
+
 ### v0.5.2 2023-09-18 Paris (France)
 
 - Fix `adler32` for OCaml implementation (integer overflow) (@dinosaure, #83)
