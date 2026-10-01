@@ -1,3 +1,7 @@
+### v0.5.4 2026-10-01 Paris (France)
+
+- Include `stddef.h` correctly for `ptrdiff_t` (@dinosaure, @kit-ty-kate, @hannesm, #90, #91)
+
 ### v0.5.3 2026-04-19 Paris (France)
 
 - Fix compilation of checkseum with clang 16.0.6 (@hannesm, #85)
